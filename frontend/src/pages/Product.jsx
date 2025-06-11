@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../../public/products_styles.css'
 
 function Product() {
   const [products, setProducts] = useState([]);
@@ -35,13 +36,12 @@ function Product() {
           <img src={product.image} alt={product.name} style={{ width: '150px', height:'100px'}} />
 
           <div className='product-info'>
-         <h4>{product.name}</h4> 
-          <p>Price: ${product.price_in_cents}</p>
+         <span>{product.name} | Price: ${product.price_in_cents}</span> 
+          <span> {product.description}</span>
           <span>Sold by: {product.user?.first_name || 'Unknown'}</span>
           {/* Hidden category (stored for filtering later) */}
           <p style={{ display: 'none' }}>{product.category?.name}</p>
-            </div>
-                    
+            </div>                   
         </div>
       ))}
     </div>
