@@ -36,8 +36,8 @@ function Product() {
           <img src={product.image} alt={product.name} style={{ width: '150px', height:'100px'}} />
 
           <div className='product-info'>
-         <span>{product.name}</span> 
-          <span>Price: ${product.price_in_cents}</span>
+         <span>{product.name} | Price: ${product.price_in_cents}</span> 
+          <span> {product.description}</span>
           <span>Sold by: {product.user?.first_name || 'Unknown'}</span>
           {/* Hidden category (stored for filtering later) */}
           <p style={{ display: 'none' }}>{product.category?.name}</p>
