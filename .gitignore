@@ -60,5 +60,3 @@ pnpm-debug.log
 
 # === Git ===
 *.orig
-frontend/node_modules/
-frontend/.vite/

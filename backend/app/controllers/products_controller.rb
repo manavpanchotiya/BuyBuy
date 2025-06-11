@@ -10,4 +10,17 @@ class ProductsController < ApplicationController
       }
     )
   end
+
+  def seller
+    user = User.find(4)
+    products = user.products.includes(:category)
+
+    render json: products.as_json(
+      only: [:id, :name, :price_in_cents, :description, :image],
+      include: {
+        user: { only: [:first_name] },
+        category: { only: [:name] }
+      }
+    )
+  end
 end
