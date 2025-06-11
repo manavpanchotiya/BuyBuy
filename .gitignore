@@ -1,0 +1,62 @@
+# === Ruby / Rails ===
+*.rbc
+*.sassc
+*.log
+*.tmp
+*.swp
+*.bak
+*.pid
+*.pid.lock
+*.sqlite3
+*.sqlite3-journal
+*.gem
+*.rbenv-vars
+!.keep
+.byebug_history
+coverage/
+db/*.sqlite3
+db/*.sqlite3-journal
+log/
+tmp/
+vendor/bundle/
+public/assets/
+public/packs/
+storage/
+
+# === Node/Vite (frontend) ===
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.parcel-cache/
+frontend/.next/
+frontend/.cache/
+frontend/build/
+
+# === Vite/Rails bridges ===
+public/vite-assets/
+public/builds/
+public/packs-test/
+
+# === Environment / Secrets ===
+.env
+.env.*
+.credentials.yml.enc
+config/master.key
+
+# === OS/System Files ===
+.DS_Store
+Thumbs.db
+
+# === IDEs / Editors ===
+.idea/
+.vscode/
+*.code-workspace
+
+# === Yarn / NPM locks ===
+yarn-error.log
+npm-debug.log
+pnpm-debug.log
+
+# === Git ===
+*.orig
