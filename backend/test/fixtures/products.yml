@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  image: MyString
+  price_in_cents: 1
+  quantity: 1
+  swappable: false
+  category: one
+  user: one
+
+two:
+  name: MyString
+  description: MyText
+  image: MyString
+  price_in_cents: 1
+  quantity: 1
+  swappable: false
+  category: two
+  user: two
