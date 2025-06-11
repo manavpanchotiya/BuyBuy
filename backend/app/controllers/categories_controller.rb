@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   def index
-    render json: Category.select(:id, :name)
+    categories = Category.select('MIN(id) as id, name').group(:name).order(:name)
+     render json: categories
   end
 end
