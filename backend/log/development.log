@@ -2874,3 +2874,1155 @@ Processing by ProductsController#index as */*
 Completed 200 OK in 14ms (Views: 0.3ms | ActiveRecord: 4.0ms (3 queries, 0 cached) | GC: 1.0ms)
 
 
+Started GET "/products" for 127.0.0.1 at 2025-06-11 16:55:45 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (16.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10], ["id", 11], ["id", 12], ["id", 13], ["id", 14], ["id", 15]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10], ["id", 11], ["id", 12], ["id", 13], ["id", 14], ["id", 15]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 73ms (Views: 0.3ms | ActiveRecord: 37.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (33.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "backend_development"[0m
+  [1m[35m (32.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "backend_test"[0m
+  [1m[35m (39.7ms)[0m  [1m[35mCREATE DATABASE "backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (38.7ms)[0m  [1m[35mCREATE DATABASE "backend_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (14.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories" CASCADE[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "chats" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "chats" ("id" bigserial primary key, "sender_id" bigint NOT NULL, "receiver_id" bigint NOT NULL, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_chats_on_receiver_id" ON "chats" ("receiver_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_chats_on_sender_id" ON "chats" ("sender_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "products" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "description" text, "image" character varying, "price_in_cents" integer, "quantity" integer, "swappable" boolean, "category_id" bigint NOT NULL, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_products_on_category_id" ON "products" ("category_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_products_on_user_id" ON "products" ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "user_email" character varying, "user_password" character varying, "first_name" character varying, "last_name" character varying, "user_type" character varying, "user_location" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "chats" ADD CONSTRAINT "fk_rails_b21078d08b"
+FOREIGN KEY ("receiver_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "chats" ADD CONSTRAINT "fk_rails_9729155e76"
+FOREIGN KEY ("sender_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "products" ADD CONSTRAINT "fk_rails_fb915499a4"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "products" ADD CONSTRAINT "fk_rails_dee2631783"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250611165534)[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250611165301),
+(20250611165255),
+(20250611165241),
+(20250611160305),
+(20250611160304),
+(20250611160303);[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-06-11 22:03:48.756990', '2025-06-11 22:03:48.756993') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'b13ecd9ec7f5c3556f5eb76d8019593904d1439e', '2025-06-11 22:03:48.760935', '2025-06-11 22:03:48.760937') RETURNING "key"[0m
+  [1m[35mSQL (13.8ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories" CASCADE[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "chats" CASCADE[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "chats" ("id" bigserial primary key, "sender_id" bigint NOT NULL, "receiver_id" bigint NOT NULL, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_chats_on_receiver_id" ON "chats" ("receiver_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_chats_on_sender_id" ON "chats" ("sender_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "products" CASCADE[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "description" text, "image" character varying, "price_in_cents" integer, "quantity" integer, "swappable" boolean, "category_id" bigint NOT NULL, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_products_on_category_id" ON "products" ("category_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_products_on_user_id" ON "products" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "user_email" character varying, "user_password" character varying, "first_name" character varying, "last_name" character varying, "user_type" character varying, "user_location" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "chats" ADD CONSTRAINT "fk_rails_b21078d08b"
+FOREIGN KEY ("receiver_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "chats" ADD CONSTRAINT "fk_rails_9729155e76"
+FOREIGN KEY ("sender_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "products" ADD CONSTRAINT "fk_rails_fb915499a4"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "products" ADD CONSTRAINT "fk_rails_dee2631783"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250611165534)[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250611165301),
+(20250611165255),
+(20250611165241),
+(20250611160305),
+(20250611160304),
+(20250611160303);[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-06-11 22:03:48.820238', '2025-06-11 22:03:48.820241') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Update (1.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2025-06-11 22:03:48.823188' WHERE "ar_internal_metadata"."key" = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'b13ecd9ec7f5c3556f5eb76d8019593904d1439e', '2025-06-11 22:03:48.825709', '2025-06-11 22:03:48.825711') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("user_email", "user_password", "first_name", "last_name", "user_location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_email", "[FILTERED]"], ["user_password", "[FILTERED]"], ["first_name", "Alice"], ["last_name", "Johnson"], ["user_location", "Toronto"], ["created_at", "2025-06-11 22:03:48.856827"], ["updated_at", "2025-06-11 22:03:48.856827"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("user_email", "user_password", "first_name", "last_name", "user_location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_email", "[FILTERED]"], ["user_password", "[FILTERED]"], ["first_name", "Bob"], ["last_name", "Smith"], ["user_location", "Vancouver"], ["created_at", "2025-06-11 22:03:48.861088"], ["updated_at", "2025-06-11 22:03:48.861088"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("user_email", "user_password", "first_name", "last_name", "user_location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_email", "[FILTERED]"], ["user_password", "[FILTERED]"], ["first_name", "Carol"], ["last_name", "Lee"], ["user_location", "Montreal"], ["created_at", "2025-06-11 22:03:48.864130"], ["updated_at", "2025-06-11 22:03:48.864130"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("user_email", "user_password", "first_name", "last_name", "user_location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_email", "[FILTERED]"], ["user_password", "[FILTERED]"], ["first_name", "Dave"], ["last_name", "Brown"], ["user_location", "Calgary"], ["created_at", "2025-06-11 22:03:48.867077"], ["updated_at", "2025-06-11 22:03:48.867077"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("user_email", "user_password", "first_name", "last_name", "user_location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_email", "[FILTERED]"], ["user_password", "[FILTERED]"], ["first_name", "Eve"], ["last_name", "Davis"], ["user_location", "Ottawa"], ["created_at", "2025-06-11 22:03:48.870584"], ["updated_at", "2025-06-11 22:03:48.870584"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Electronics"], ["created_at", "2025-06-11 22:03:48.878210"], ["updated_at", "2025-06-11 22:03:48.878210"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.0ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Automobiles"], ["created_at", "2025-06-11 22:03:48.881919"], ["updated_at", "2025-06-11 22:03:48.881919"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.9ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Clothing"], ["created_at", "2025-06-11 22:03:48.885135"], ["updated_at", "2025-06-11 22:03:48.885135"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Home & Garden"], ["created_at", "2025-06-11 22:03:48.888538"], ["updated_at", "2025-06-11 22:03:48.888538"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.0ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Toys"], ["created_at", "2025-06-11 22:03:48.892030"], ["updated_at", "2025-06-11 22:03:48.892030"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "image", "price_in_cents", "quantity", "swappable", "category_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Wireless Mouse"], ["description", "Ergonomic wireless mouse"], ["image", "https://webobjects2.cdw.com/is/image/CDW/6842922?$product-main$"], ["price_in_cents", 2500], ["quantity", 10], ["swappable", false], ["category_id", 1], ["user_id", 1], ["created_at", "2025-06-11 22:03:48.911405"], ["updated_at", "2025-06-11 22:03:48.911405"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.3ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "image", "price_in_cents", "quantity", "swappable", "category_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "2015 Toyota Camry"], ["description", "A reliable mid-size sedan with excellent fuel economy, comfortable interior, and smooth ride. Well-maintained with low mileage."], ["image", "https://mkt-vehicleimages-prd.autotradercdn.ca/photos/chrome/Expanded/White/2015TOY003a/2015TOY003a01.jpg"], ["price_in_cents", 1800000], ["quantity", 1], ["swappable", false], ["category_id", 2], ["user_id", 2], ["created_at", "2025-06-11 22:03:48.918399"], ["updated_at", "2025-06-11 22:03:48.918399"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.3ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "image", "price_in_cents", "quantity", "swappable", "category_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Men's Jacket"], ["description", "Warm and stylish jacket"], ["image", "https://rab.equipment/media/catalog/product/c/i/cirrus_jacket_army_qip_27_arm.jpg?optimize=medium&fit=bounds&height=&width="], ["price_in_cents", 7500], ["quantity", 1], ["swappable", true], ["category_id", 3], ["user_id", 3], ["created_at", "2025-06-11 22:03:48.924684"], ["updated_at", "2025-06-11 22:03:48.924684"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.3ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "image", "price_in_cents", "quantity", "swappable", "category_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Garden Tool Set"], ["description", "Complete set for gardening"], ["image", "https://www.leevalley.com/_next/image?url=https%3A%2F%2Fimages.contentstack.io%2Fv3%2Fassets%2Fblt050573defaf102e3%2Fbltabdd9a3ed5c35e2d%2F669c04e4b74b30248eff89d5%2Fhttps_assets.leevalley.com_Size5_10115_AB634-set-of-9-lee-valley-garden-tools-d-2307.jpg%3Fbranch%3Dproduction&w=3840&q=75"], ["price_in_cents", 3200], ["quantity", 8], ["swappable", false], ["category_id", 4], ["user_id", 4], ["created_at", "2025-06-11 22:03:48.930861"], ["updated_at", "2025-06-11 22:03:48.930861"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.3ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "image", "price_in_cents", "quantity", "swappable", "category_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Building Blocks Set"], ["description", "Creative toy blocks for kids"], ["image", "https://cdn.schoolspecialty.com/122bea52-6dc3-4c9a-ae06-b0f1000241ab/076549_E_JPG%20Output.jpg?width=700&height=700&fit=bounds&canvas=700,700&bg-color=ffffff"], ["price_in_cents", 1800], ["quantity", 15], ["swappable", true], ["category_id", 5], ["user_id", 5], ["created_at", "2025-06-11 22:03:48.937367"], ["updated_at", "2025-06-11 22:03:48.937367"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mChat Create (0.5ms)[0m  [1m[32mINSERT INTO "chats" ("sender_id", "receiver_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sender_id", 1], ["receiver_id", 2], ["content", "Hi Bob, interested in Camry?"], ["created_at", "2025-06-11 22:03:48.950060"], ["updated_at", "2025-06-11 22:03:48.950060"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mChat Create (0.2ms)[0m  [1m[32mINSERT INTO "chats" ("sender_id", "receiver_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sender_id", 2], ["receiver_id", 1], ["content", "Hey Alice, yes it’s available!"], ["created_at", "2025-06-11 22:03:48.957087"], ["updated_at", "2025-06-11 22:03:48.957087"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mChat Create (0.3ms)[0m  [1m[32mINSERT INTO "chats" ("sender_id", "receiver_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sender_id", 3], ["receiver_id", 4], ["content", "Dave, is the garden tool set still for sale?"], ["created_at", "2025-06-11 22:03:48.963075"], ["updated_at", "2025-06-11 22:03:48.963075"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mChat Create (0.3ms)[0m  [1m[32mINSERT INTO "chats" ("sender_id", "receiver_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sender_id", 4], ["receiver_id", 3], ["content", "Yes Carol, you can pick it up this weekend."], ["created_at", "2025-06-11 22:03:48.969055"], ["updated_at", "2025-06-11 22:03:48.969055"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mChat Create (0.3ms)[0m  [1m[32mINSERT INTO "chats" ("sender_id", "receiver_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sender_id", 5], ["receiver_id", 1], ["content", "Alice, want to swap some toys?"], ["created_at", "2025-06-11 22:03:48.979223"], ["updated_at", "2025-06-11 22:03:48.979223"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("user_email", "user_password", "first_name", "last_name", "user_location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_email", "[FILTERED]"], ["user_password", "[FILTERED]"], ["first_name", "Alice"], ["last_name", "Johnson"], ["user_location", "Toronto"], ["created_at", "2025-06-11 22:03:54.293318"], ["updated_at", "2025-06-11 22:03:54.293318"]]
+  [1m[36mTRANSACTION (10.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("user_email", "user_password", "first_name", "last_name", "user_location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_email", "[FILTERED]"], ["user_password", "[FILTERED]"], ["first_name", "Bob"], ["last_name", "Smith"], ["user_location", "Vancouver"], ["created_at", "2025-06-11 22:03:54.307848"], ["updated_at", "2025-06-11 22:03:54.307848"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("user_email", "user_password", "first_name", "last_name", "user_location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_email", "[FILTERED]"], ["user_password", "[FILTERED]"], ["first_name", "Carol"], ["last_name", "Lee"], ["user_location", "Montreal"], ["created_at", "2025-06-11 22:03:54.312266"], ["updated_at", "2025-06-11 22:03:54.312266"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("user_email", "user_password", "first_name", "last_name", "user_location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_email", "[FILTERED]"], ["user_password", "[FILTERED]"], ["first_name", "Dave"], ["last_name", "Brown"], ["user_location", "Calgary"], ["created_at", "2025-06-11 22:03:54.316017"], ["updated_at", "2025-06-11 22:03:54.316017"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("user_email", "user_password", "first_name", "last_name", "user_location", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_email", "[FILTERED]"], ["user_password", "[FILTERED]"], ["first_name", "Eve"], ["last_name", "Davis"], ["user_location", "Ottawa"], ["created_at", "2025-06-11 22:03:54.319151"], ["updated_at", "2025-06-11 22:03:54.319151"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Electronics"], ["created_at", "2025-06-11 22:03:54.327348"], ["updated_at", "2025-06-11 22:03:54.327348"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.1ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Automobiles"], ["created_at", "2025-06-11 22:03:54.331055"], ["updated_at", "2025-06-11 22:03:54.331055"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (14.8ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Clothing"], ["created_at", "2025-06-11 22:03:54.334506"], ["updated_at", "2025-06-11 22:03:54.334506"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.5ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Home & Garden"], ["created_at", "2025-06-11 22:03:54.374342"], ["updated_at", "2025-06-11 22:03:54.374342"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (1.2ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Toys"], ["created_at", "2025-06-11 22:03:54.378717"], ["updated_at", "2025-06-11 22:03:54.378717"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "image", "price_in_cents", "quantity", "swappable", "category_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Wireless Mouse"], ["description", "Ergonomic wireless mouse"], ["image", "https://webobjects2.cdw.com/is/image/CDW/6842922?$product-main$"], ["price_in_cents", 2500], ["quantity", 10], ["swappable", false], ["category_id", 6], ["user_id", 6], ["created_at", "2025-06-11 22:03:54.402069"], ["updated_at", "2025-06-11 22:03:54.402069"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "image", "price_in_cents", "quantity", "swappable", "category_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "2015 Toyota Camry"], ["description", "A reliable mid-size sedan with excellent fuel economy, comfortable interior, and smooth ride. Well-maintained with low mileage."], ["image", "https://mkt-vehicleimages-prd.autotradercdn.ca/photos/chrome/Expanded/White/2015TOY003a/2015TOY003a01.jpg"], ["price_in_cents", 1800000], ["quantity", 1], ["swappable", false], ["category_id", 7], ["user_id", 7], ["created_at", "2025-06-11 22:03:54.408137"], ["updated_at", "2025-06-11 22:03:54.408137"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "image", "price_in_cents", "quantity", "swappable", "category_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Men's Jacket"], ["description", "Warm and stylish jacket"], ["image", "https://rab.equipment/media/catalog/product/c/i/cirrus_jacket_army_qip_27_arm.jpg?optimize=medium&fit=bounds&height=&width="], ["price_in_cents", 7500], ["quantity", 1], ["swappable", true], ["category_id", 8], ["user_id", 8], ["created_at", "2025-06-11 22:03:54.413901"], ["updated_at", "2025-06-11 22:03:54.413901"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.3ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "image", "price_in_cents", "quantity", "swappable", "category_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Garden Tool Set"], ["description", "Complete set for gardening"], ["image", "https://www.leevalley.com/_next/image?url=https%3A%2F%2Fimages.contentstack.io%2Fv3%2Fassets%2Fblt050573defaf102e3%2Fbltabdd9a3ed5c35e2d%2F669c04e4b74b30248eff89d5%2Fhttps_assets.leevalley.com_Size5_10115_AB634-set-of-9-lee-valley-garden-tools-d-2307.jpg%3Fbranch%3Dproduction&w=3840&q=75"], ["price_in_cents", 3200], ["quantity", 8], ["swappable", false], ["category_id", 9], ["user_id", 9], ["created_at", "2025-06-11 22:03:54.419732"], ["updated_at", "2025-06-11 22:03:54.419732"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO "products" ("name", "description", "image", "price_in_cents", "quantity", "swappable", "category_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Building Blocks Set"], ["description", "Creative toy blocks for kids"], ["image", "https://cdn.schoolspecialty.com/122bea52-6dc3-4c9a-ae06-b0f1000241ab/076549_E_JPG%20Output.jpg?width=700&height=700&fit=bounds&canvas=700,700&bg-color=ffffff"], ["price_in_cents", 1800], ["quantity", 15], ["swappable", true], ["category_id", 10], ["user_id", 10], ["created_at", "2025-06-11 22:03:54.425640"], ["updated_at", "2025-06-11 22:03:54.425640"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mChat Create (0.4ms)[0m  [1m[32mINSERT INTO "chats" ("sender_id", "receiver_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sender_id", 6], ["receiver_id", 7], ["content", "Hi Bob, interested in Camry?"], ["created_at", "2025-06-11 22:03:54.438123"], ["updated_at", "2025-06-11 22:03:54.438123"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mChat Create (0.2ms)[0m  [1m[32mINSERT INTO "chats" ("sender_id", "receiver_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sender_id", 7], ["receiver_id", 6], ["content", "Hey Alice, yes it’s available!"], ["created_at", "2025-06-11 22:03:54.444484"], ["updated_at", "2025-06-11 22:03:54.444484"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mChat Create (0.2ms)[0m  [1m[32mINSERT INTO "chats" ("sender_id", "receiver_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sender_id", 8], ["receiver_id", 9], ["content", "Dave, is the garden tool set still for sale?"], ["created_at", "2025-06-11 22:03:54.449987"], ["updated_at", "2025-06-11 22:03:54.449987"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mChat Create (0.2ms)[0m  [1m[32mINSERT INTO "chats" ("sender_id", "receiver_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sender_id", 9], ["receiver_id", 8], ["content", "Yes Carol, you can pick it up this weekend."], ["created_at", "2025-06-11 22:03:54.455081"], ["updated_at", "2025-06-11 22:03:54.455081"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mChat Create (0.3ms)[0m  [1m[32mINSERT INTO "chats" ("sender_id", "receiver_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["sender_id", 10], ["receiver_id", 6], ["content", "Alice, want to swap some toys?"], ["created_at", "2025-06-11 22:03:54.460512"], ["updated_at", "2025-06-11 22:03:54.460512"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:04:53 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/home/manav-panchotiya/Desktop/lighthouse/rails-react-vite-starter/backend/app/controllers/products_controller.rb:20: syntax error, unexpected local variable or method, expecting ')'
+      include: {
+      ^~~~~~~
+/home/manav-panchotiya/Desktop/lighthouse/rails-react-vite-starter/backend/app/controllers/products_controller.rb:23: syntax error, unexpected ')', expecting `end'
+    )
+    ^
+):
+  
+app/controllers/products_controller.rb:20: syntax error, unexpected local variable or method, expecting ')'
+app/controllers/products_controller.rb:23: syntax error, unexpected ')', expecting `end'
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:06:08 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (20.5ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 92ms (Views: 0.4ms | ActiveRecord: 47.8ms (3 queries, 0 cached) | GC: 13.1ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:07:30 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 71ms (Views: 0.5ms | ActiveRecord: 17.4ms (3 queries, 0 cached) | GC: 41.5ms)
+
+
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProduct Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+Started GET "/seller/seller" for 127.0.0.1 at 2025-06-11 17:18:49 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/seller/seller"):
+  
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:19:36 -0500
+Processing by ProductsController#seller as HTML
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 9.8ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::StatementInvalid (PG::UndefinedColumn: ERROR:  column users.email does not exist
+LINE 1: SELECT "users".* FROM "users" WHERE "users"."email" = $1 LIM...
+                                            ^
+):
+
+Causes:
+PG::UndefinedColumn (ERROR:  column users.email does not exist
+LINE 1: SELECT "users".* FROM "users" WHERE "users"."email" = $1 LIM...
+                                            ^
+)
+  
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:20:15 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 41ms (Views: 0.2ms | ActiveRecord: 18.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:21:42 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 31ms (Views: 0.2ms | ActiveRecord: 13.4ms (3 queries, 0 cached) | GC: 1.7ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:21:43 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 2.0ms (3 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:21:44 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 2.3ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:21:44 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 1.8ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:21:44 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.4ms | ActiveRecord: 1.9ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:21:44 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (1.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 2.0ms (3 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:21:44 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 2.0ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:21:44 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.9ms (3 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:21:49 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 2.3ms (3 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:22:14 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 1.9ms (3 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:22:16 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 2.3ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:22:17 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 1.4ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:22:18 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 2.1ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:22:19 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 10ms (Views: 0.3ms | ActiveRecord: 2.8ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:22:20 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.6ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:22:23 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 2.2ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:22:27 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 2.0ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:22:28 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 8ms (Views: 0.3ms | ActiveRecord: 2.2ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:22:29 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 2.0ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:23:42 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 2.4ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:23:44 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 8ms (Views: 0.6ms | ActiveRecord: 2.2ms (3 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:23:45 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (1.1ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 15ms (Views: 0.4ms | ActiveRecord: 7.9ms (3 queries, 0 cached) | GC: 5.4ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:23:46 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 8ms (Views: 0.3ms | ActiveRecord: 2.3ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:23:49 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 2.5ms (3 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:24:35 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 2.3ms (3 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:26:33 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (21.9ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (1.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 133ms (Views: 0.3ms | ActiveRecord: 51.4ms (3 queries, 0 cached) | GC: 50.9ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:26:36 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 13ms (Views: 0.1ms | ActiveRecord: 2.6ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:26:38 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 2.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:26:39 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 2.6ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:26:41 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 2.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:27:14 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (1.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (1.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 43ms (Views: 0.3ms | ActiveRecord: 17.9ms (3 queries, 0 cached) | GC: 2.6ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:27:16 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 2.0ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:27:18 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (1.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (1.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 3.0ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:27:19 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (1.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 2.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:27:37 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 107ms (Views: 0.2ms | ActiveRecord: 43.1ms (3 queries, 0 cached) | GC: 43.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:27:41 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 10ms (Views: 0.4ms | ActiveRecord: 2.2ms (3 queries, 0 cached) | GC: 1.1ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:27:50 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 2.3ms (3 queries, 0 cached) | GC: 2.1ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:27:54 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 2.2ms (3 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:27:55 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (1.5ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 15ms (Views: 0.4ms | ActiveRecord: 4.5ms (3 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:27:56 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.7ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:27:57 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 1.8ms (3 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:28:43 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 96ms (Views: 0.2ms | ActiveRecord: 55.2ms (3 queries, 0 cached) | GC: 5.1ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:28:47 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (7.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (5.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 36ms (Views: 0.1ms | ActiveRecord: 13.5ms (3 queries, 0 cached) | GC: 27.6ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:28:51 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (4.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 6.1ms (3 queries, 0 cached) | GC: 5.5ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:30:23 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.8ms (3 queries, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:30:41 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.8ms (3 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:32:35 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 31ms (Views: 0.2ms | ActiveRecord: 14.3ms (3 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:33:37 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 32ms (Views: 0.3ms | ActiveRecord: 15.0ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:33:39 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 1.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:34:14 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.6ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:35:00 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.9ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:35:06 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:35:16 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.8ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:35:19 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 10ms (Views: 0.4ms | ActiveRecord: 2.8ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:35:43 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 3.0ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:36:01 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 35ms (Views: 0.1ms | ActiveRecord: 13.7ms (3 queries, 0 cached) | GC: 4.6ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:36:04 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 2.1ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:36:05 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.6ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:36:11 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (1.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 2.6ms (3 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:36:37 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.6ms (3 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:36:40 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 2.3ms (3 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:36:41 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 2.7ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:36:49 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 2.4ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:36:50 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 10ms (Views: 0.9ms | ActiveRecord: 2.0ms (3 queries, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:36:51 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 2.7ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2025-06-11 17:36:51 -0500
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+  [1m[36mCategory Load (1.0ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" IN ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)[0m  [["id", 1], ["id", 2], ["id", 3], ["id", 4], ["id", 5], ["id", 6], ["id", 7], ["id", 8], ["id", 9], ["id", 10]]
+  ↳ app/controllers/products_controller.rb:5:in `index'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 2.5ms (3 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:36:56 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 2.5ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:37:55 -0500
+Processing by ProductsController#seller as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.6ms (3 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:38:01 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 1.7ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:38:26 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 2.4ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:38:29 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.7ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 1.9ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:41:00 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 2.2ms (3 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/seller" for 127.0.0.1 at 2025-06-11 17:41:08 -0500
+Processing by ProductsController#seller as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:15:in `seller'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."user_id" = $1[0m  [["user_id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+  [1m[36mCategory Load (0.6ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1[0m  [["id", 4]]
+  ↳ app/controllers/products_controller.rb:18:in `seller'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.6ms (3 queries, 0 cached) | GC: 0.2ms)
+
+

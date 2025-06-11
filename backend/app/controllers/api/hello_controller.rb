@@ -1,6 +1,6 @@
 module Api
   class HelloController < ApplicationController
-    def hello
+    def index
       render json: { message: "Hello from Rails API!" }
     end
   end
