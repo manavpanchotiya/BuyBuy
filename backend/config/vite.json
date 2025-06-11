@@ -1,0 +1,6 @@
+{
+  "config": "vite.config.js",
+  "build": {
+    "outDir": "dist"
+  }
+}

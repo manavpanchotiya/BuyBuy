@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Backend</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= vite_client_tag %>
+    <%= vite_stylesheet_tag 'application.css' %>
+    <%= vite_javascript_tag 'main.jsx' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
