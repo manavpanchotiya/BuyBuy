@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   end
 
   def seller
-    user = User.find(4)
+    user = User.find(1)
     products = user.products.includes(:category)
 
     render json: products.as_json(
