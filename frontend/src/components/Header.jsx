@@ -4,6 +4,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import '../../public/header_styles.css'
 import Home from "../pages/Home";
 import About from "../pages/About";
+import SellerProducts from "../pages/Seller";
+import NewProduct from "../pages/NewProductsForm";
 
 export default function Header({
   searchTerm,
@@ -22,12 +24,15 @@ export default function Header({
 
   return (
     <header className='header_layout'>
-    <img className='header-img' src='../public/images/sampleHeader.png' alt='Buybuy' />
+    <img className='header-img' src='/images/sampleHeader.png' alt='Buybuy' />
 
     <nav className="nav-links">
         <Link to="/">Home</Link> |{" "}
         <Link to="/about">About</Link> |{" "}
-        <Link to="/products">All Products</Link>
+        <Link to="/products">All Products</Link> | {""}
+        <Link to="/seller">My Products</Link> |{" "}
+        <Link to="/login">Login</Link> |{" "}
+        <Link to="/login">Sign Up</Link>
       </nav>
     
       <div className="search-filter-bar">
