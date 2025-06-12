@@ -32,8 +32,8 @@ frontend/.parcel-cache/
 frontend/.next/
 frontend/.cache/
 frontend/build/
-backend/log
-backend/tmp
+backend/log/
+backend/tmp/
 
 # === Vite/Rails bridges ===
 public/vite-assets/
