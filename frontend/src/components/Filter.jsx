@@ -43,7 +43,9 @@ export default function Filter({
         </select>
       </div>
 
+      <span className="submit-search"> 
       <button type="submit" className="search_button">Search</button>
+      </span>
     </div>
   );
 }

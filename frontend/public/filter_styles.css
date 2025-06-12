@@ -1,25 +1,36 @@
 .search-input {
-  padding: 15px;
-  margin: 25px 10px;
+  /* padding: 15px; */
+  margin-left: 30px; 
   width: 20%;
   font-size: 16px;
   border-radius: 10px;
   border: 1px solid #ccc;
+  height: 40px;
 }
 
 .filter-dropdown {
-  padding: 15px;
-  margin: 20px;
+ /*  padding: 15px; */
+  /* margin: 20px; */
   border-radius: 5px;
   background-color: #fff;
   color: #333;
   width: 155px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.filter-slot{
+  margin-left: 20px;
+  font-size: larger;
 }
 
 .search-filter-bar {
   display: flex;
+  margin-top: 20px;
 }
 
 .search_button {
-  height: 30px;
+  font-size: larger;
+  height: 40px;
+  margin-left: 3px;
 }
