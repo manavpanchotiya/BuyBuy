@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
     render json: products.as_json(
       only: [:id, :name, :price_in_cents, :description, :image], # include the price here
       include: {
-        user: { only: [:first_name] },
+        user: { only: [:first_name, :user_location] },
         category: { only: [:name] }
       }
     )
