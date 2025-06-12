@@ -21,3 +21,25 @@
   flex-direction: column;
   text-align: center;
 }
+
+.flash-alert {
+  background-color: #ffe0e0;
+  color: #a33;
+  padding: 1rem;
+  margin: 1rem;
+  border: 1px solid #f5c2c2;
+  border-radius: 4px;
+  position: relative;
+  width: 450px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  color: #a33;
+}

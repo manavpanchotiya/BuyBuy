@@ -5,14 +5,15 @@ export default function Filter({
   searchTerm,
   onSearchChange,
   category,
-  onCategoryChange,
+  onCategory,
+  onSubmitClick
 }) {
   const handleSearchChange = (e) => {
     onSearchChange(e.target.value);
   };
 
   const handleCategoryChange = (e) => {
-    onCategoryChange(e.target.value);
+    onCategory(e.target.value);
   };
 
   return (
@@ -44,7 +45,7 @@ export default function Filter({
       </div>
 
       <span className="submit-search"> 
-      <button type="submit" className="search_button">Search</button>
+      <button type="submit" className="search_button" onClick={onSubmitClick}>Search</button>
       </span>
     </div>
   );
