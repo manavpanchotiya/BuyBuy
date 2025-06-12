@@ -1,3 +1,17 @@
+.header-img{
+ width: 100%;
+  /* max-width: 950px; */
+  margin: 0 auto;
+  display: block;
+}
+
+.header_layout {
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+
 .search-input {
   /* padding: 15px; */
   margin-left: 30px; 

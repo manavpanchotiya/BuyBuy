@@ -1,7 +1,11 @@
 import React from "react";
-import '../../public/filter_styles.css'
+/* import '../../public/filter_styles.css' */
+import { Routes, Route, Link } from "react-router-dom";
+import '../../public/header_styles.css'
+import Home from "../pages/Home";
+import About from "../pages/About";
 
-export default function Filter({
+export default function Header({
   searchTerm,
   onSearchChange,
   category,
@@ -17,6 +21,14 @@ export default function Filter({
   };
 
   return (
+    <header className='header_layout'>
+    <img className='header-img' src='../public/images/sampleHeader.png' alt='Buybuy' />
+
+    <nav className="nav-links">
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/about">About</Link> |{" "}
+        <Link to="/products">All Products</Link>
+      </nav>
     
       <div className="search-filter-bar">
         <input 
@@ -48,5 +60,6 @@ export default function Filter({
       <button type="submit" className="search_button" onClick={onSubmitClick}>Search</button>
       </span>
     </div>
+    </header>
   );
 }

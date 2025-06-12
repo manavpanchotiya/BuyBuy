@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../../public/products_styles.css';
-import Filter from '../components/Filter';
+import Header from '../components/Header';
+import { Link } from 'react-router-dom';
+
 
 function Product() {
   const [products, setProducts] = useState([]);
@@ -47,7 +49,7 @@ function Product() {
   );
 
   const handleSubmit = () => {
-    setSearchSubmitted(true); //  Trigger this when Search button is clicked
+    setSearchSubmitted(true); 
   };
 
   useEffect(() => {
@@ -70,7 +72,7 @@ function Product() {
 
   return (
     <div className='main-container'>
-      <Filter
+      <Header
         searchTerm={searchTerm}
         onSearchChange={(value) => {
           setSearchTerm(value);
@@ -102,7 +104,10 @@ function Product() {
       <div className='product-container'>
         {filterProductItems.map((product) => (
           <div key={product.id} style={{ border: '1px solid #ddd', margin: '1rem', padding: '1rem' }}>
-            <img src={product.image} alt={product.name} style={{ width: '150px', height: '100px' }} />
+
+            <Link to={`/product/${product.id}`}>
+            <img src={product.image} alt={product.name} /* style={{ width: '150px', height: '100px' }} */ />
+            </Link>
             <div className='product-info'>
               <span>{product.name} | Price: ${product.price_in_cents}</span> 
               <span>{product.description}</span>
