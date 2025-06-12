@@ -48,3 +48,9 @@
   height: 40px;
   margin-left: 3px;
 }
+
+.nav_link {
+  display: flex;
+  flex-direction: column;
+  min-width: 100vh
+}
