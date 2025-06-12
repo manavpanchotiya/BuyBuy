@@ -28,7 +28,7 @@ function SellerProducts() {
 
   return (
     <div className="seller-product-container">
-      <h2>Your Listings</h2>
+      <h2>My Listings</h2>
       <Link to="/seller/new">
         <button>Add New Item</button>
       </Link>

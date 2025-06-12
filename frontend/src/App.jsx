@@ -12,7 +12,7 @@ export default function App() {
         <Link to="/">Home</Link> |{" "}
         <Link to="/about">About</Link> |{" "}
         <Link to="/products">All Products</Link> |{" "}
-        <Link to="/seller">Your Products</Link> |{" "}
+        <Link to="/seller">My Products</Link> |{" "}
         <Link to="/login">Login</Link> |{" "}
         <Link to="/login">Sign Up</Link>
       </nav>
