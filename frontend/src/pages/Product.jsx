@@ -1,123 +1,104 @@
 import React, { useEffect, useState } from 'react';
-import '../../public/products_styles.css';
-import Header from '../components/Header';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
+import '../styles/products_styles.css'
 
 
-function Product() {
+export default function Product() {
+  // Get search/filter props and control state from Layout via useOutletContext
+  const { searchTerm, category, searchSubmitted, setSearchSubmitted } = useOutletContext();
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [category, setCategory] = useState("");
-  const [flashMessage, setFlashMessage] = useState("");
+  const [flashMessage, setFlashMessage] = useState('');
   const [showFlash, setShowFlash] = useState(false);
-  const [searchSubmitted, setSearchSubmitted] = useState(false); 
 
   useEffect(() => {
     fetch('http://localhost:3000/products')
-      .then((res) => {
-        if (!res.ok) throw new Error('Network response was not ok');
-        return res.json();
-      })
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setProducts(data);
         setLoading(false);
       })
-      .catch((error) => {
-        console.error('Fetch error:', error);
-        setLoading(false);
-      });
+      .catch(() => setLoading(false));
   }, []);
 
-  const matchesSearchTerm = (product) => {
-    const firstName = product.user?.first_name?.toLowerCase() || "";
-    const userLocation = product.user?.user_location?.toLowerCase() || "";
-    return (
-      firstName.includes(searchTerm.toLowerCase()) ||
-      userLocation.includes(searchTerm.toLowerCase())
-    );
-  };
+  // Filter products based on search and category
+  const filtered = products.filter(product => {
+    const searchMatch =
+      product.user?.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.user?.user_location?.toLowerCase().includes(searchTerm.toLowerCase());
 
-  const matchesCategory = (product, category) => {
-    if (!category || category === "All Categories") return true;
-    return product.category?.name === category;
-  };
+    const categoryMatch = !category || category === '' || product.category?.name === category;
 
-  const filterProductItems = products.filter(
-    (product) =>
-      matchesSearchTerm(product) && matchesCategory(product, category)
-  );
+    // If searchTerm is empty, just filter by category
+    return searchTerm ? searchMatch && categoryMatch : categoryMatch;
+  });
 
-  const handleSubmit = () => {
-    setSearchSubmitted(true); 
-  };
-
+  // Effect to show flash error message if search yields no results after submit
   useEffect(() => {
     if (!loading && searchSubmitted) {
-      if (filterProductItems.length === 0) {
+      if (filtered.length === 0) {
         setFlashMessage(
           `No product found for "${searchTerm || 'your search'}"${
             category ? ` in category "${category}"` : ""
-          }. Search again`
+          }. Please try again.`
         );
         setShowFlash(true);
       } else {
-        setFlashMessage("");
+        setFlashMessage('');
         setShowFlash(false);
       }
     }
-  }, [filterProductItems.length, searchSubmitted, searchTerm, category, loading]);
+  }, [filtered.length, searchSubmitted, searchTerm, category, loading]);
 
   if (loading) return <p>Loading products...</p>;
 
   return (
-    <div className='main-container'>
-      <Header
-        searchTerm={searchTerm}
-        onSearchChange={(value) => {
-          setSearchTerm(value);
-          setSearchSubmitted(false); // reset
-        }}
-        category={category}
-        onCategory={(value) => {
-          setCategory(value);
-          setSearchSubmitted(false); // reset
-        }}
-        onSubmitClick={handleSubmit}
-      />
-
+    <div>
       {showFlash && (
-        <div className="flash-alert">
+        <div style={{ backgroundColor: '#fcc', padding: '0.5rem', marginBottom: '1rem', borderRadius: '4px' }}>
           {flashMessage}
-          <button className="close-btn" onClick={() => {
-            setSearchTerm("");
-            setCategory("");
-            setSearchSubmitted(false);
-            setFlashMessage("");
-            setShowFlash(false);
-          }
-        }
-        >×</button>
+          <button
+            onClick={() => {
+              setFlashMessage('');
+              setShowFlash(false);
+              setSearchSubmitted(false);
+            }}
+            style={{
+              marginLeft: '1rem',
+              cursor: 'pointer',
+              background: 'transparent',
+              border: 'none',
+              fontWeight: 'bold',
+              fontSize: '1.2rem',
+              lineHeight: '1',
+            }}
+            aria-label="Close error message"
+          >
+            ×
+          </button>
         </div>
       )}
 
-      <div className='product-container'>
-        {filterProductItems.map((product) => (
-          <div key={product.id} style={{ border: '1px solid #ddd', margin: '1rem', padding: '1rem' }}>
-
+      <div className="product-container">
+        {filtered.map(product => (
+          <div
+            key={product.id}
+            style={{ border: '1px solid #ddd', padding: '1rem', borderRadius: '4px' }}
+          >
             <Link to={`/product/${product.id}`}>
-            <img src={product.image} alt={product.name} /* style={{ width: '150px', height: '100px' }} */ />
+              <img
+                src={product.image}
+                alt={product.name}
+                style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px' }}
+              />
             </Link>
-            <div className='product-info'>
-              <span>{product.name} | Price: ${product.price_in_cents}</span> 
-              <span>{product.description}</span>
-              <span>Sold by: {product.user?.first_name}</span>
-            </div>
+            <span> {product.name} | {product.description} </span>
+            <span>Quantity:{product.quantity} | Sold by: {product.user?.first_name}</span>
+            <p>Price: ${(product.price_in_cents / 100).toFixed(2)}</p>
           </div>
         ))}
       </div>
     </div>
   );
 }
-
-export default Product;

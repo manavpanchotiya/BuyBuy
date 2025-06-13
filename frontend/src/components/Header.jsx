@@ -1,70 +1,55 @@
-import React from "react";
-/* import '../../public/filter_styles.css' */
-import { Routes, Route, Link } from "react-router-dom";
-import '../../public/header_styles.css'
-import Home from "../pages/Home";
-import About from "../pages/About";
-import SellerProducts from "../pages/Seller";
-import NewProduct from "../pages/NewProductsForm";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/header_styles.css';
+import favIcon from '../assets/favicon.png'; 
 
-export default function Header({
-  searchTerm,
-  onSearchChange,
-  category,
-  onCategory,
-  onSubmitClick
-}) {
-  const handleSearchChange = (e) => {
-    onSearchChange(e.target.value);
-  };
-
-  const handleCategoryChange = (e) => {
-    onCategory(e.target.value);
-  };
-
+export default function Header({ searchTerm, onSearchChange, category, onCategoryChange, onSubmitClick }) {
   return (
     <header className='header_layout'>
-    <img className='header-img' src='/images/sampleHeader.png' alt='Buybuy' />
 
-    <nav className="nav-links">
+      <img className="header-img" src=".././assets/sampleHeader.png" alt="Buybuy" />
+      <nav className="nav-links">
         <Link to="/">Home</Link> |{" "}
-        <Link to="/about">About</Link> |{" "}
-        <Link to="/products">All Products</Link> | {""}
+        <Link to="/products">All Products</Link> |{" "}
         <Link to="/seller">My Products</Link> |{" "}
         <Link to="/login">Login</Link> |{" "}
-        <Link to="/login">Sign Up</Link>
+        <Link to="/login">Login</Link> |{" "}
+        <Link to="/signup">Sign Up</Link>
       </nav>
-    
-      <div className="search-filter-bar">
-        <input 
-          type="text"
-          className="search-input"
-          value={searchTerm}
-          placeholder="Search by location"
-          onChange={handleSearchChange}
-        />
-      
 
-      <div className="filter-slot">
-        <label>Category</label>
-        <select
-          className="filter-dropdown"
-          value={category}
-          onChange={handleCategoryChange}
-        >
-          <option value="">All Categories</option>
-          <option value="Automobiles">Automobiles</option>
-          <option value="Clothing">Clothing</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Home & Garden">Home & Garden</option>
-          <option value="Toys">Toys</option>
-        </select>
+      <div className='favourite_items'>
+        <img src={favIcon} alt='Favourites' />
       </div>
 
-      <span className="submit-search"> 
-      <button type="submit" className="search_button" onClick={onSubmitClick}>Search</button>
-      </span>
-    </div>
+      <input
+        type="text"
+        value={searchTerm}
+        placeholder="Search by seller or location"
+        onChange={(e) => onSearchChange(e.target.value)}
+        style={{ padding: '0.5rem', marginRight: '1rem', width: '250px' }}
+      />
+
+      <select
+        value={category}
+        onChange={(e) => onCategoryChange(e.target.value)}
+        style={{ padding: '0.5rem', marginRight: '1rem' }}
+      >
+        <option value="">All Categories</option>
+        <option value="Automobiles">Automobiles</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Home & Garden">Home & Garden</option>
+        <option value="Toys">Toys</option>
+      </select>
+
+      <button
+        onClick={onSubmitClick}
+        style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}
+        type="button"
+      >
+        Search
+      </button>
+
     </header>
   );
 }
