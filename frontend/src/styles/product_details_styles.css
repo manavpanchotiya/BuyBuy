@@ -1,0 +1,27 @@
+.product_details_container {
+  display: flex;
+  flex-direction:row;
+  margin-top: 20px;
+
+}
+
+.buy_sell_chat_section {
+  border: 1px solid black;
+  height: 200px;
+  width: 300px;
+  margin-left: 20px;
+}
+
+.chat_input {
+  width: 200px;
+  height: 100px;
+  
+}
+
+.product-detail {
+  border: 1px solid black;
+  width: 700px;
+  margin-left: 30px;
+}
+
+buy_sell_chat_section
