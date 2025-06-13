@@ -93,8 +93,8 @@ export default function Product() {
                 style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px' }}
               />
             </Link>
-            <h3>{product.name}</h3>
-            <p>Sold by: {product.user?.first_name}</p>
+            <span> {product.name} | {product.description} </span>
+            <span>Quantity:{product.quantity} | Sold by: {product.user?.first_name}</span>
             <p>Price: ${(product.price_in_cents / 100).toFixed(2)}</p>
           </div>
         ))}

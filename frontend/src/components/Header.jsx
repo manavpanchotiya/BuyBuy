@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/header_styles.css'
+import '../styles/header_styles.css';
+import favIcon from '../assets/favicon.png'; 
 
 export default function Header({ searchTerm, onSearchChange, category, onCategoryChange, onSubmitClick }) {
   return (
     <header className='header_layout'>
 
-      <img className="header-img" src="../assets/sampleHeader.png" alt="Buybuy" />
+      <img className="header-img" src=".././assets/sampleHeader.png" alt="Buybuy" />
       <nav className="nav-links">
         <Link to="/">Home</Link> |{" "}
         <Link to="/products">All Products</Link> |{" "}
@@ -15,6 +16,10 @@ export default function Header({ searchTerm, onSearchChange, category, onCategor
         <Link to="/login">Login</Link> |{" "}
         <Link to="/signup">Sign Up</Link>
       </nav>
+
+      <div className='favourite_items'>
+        <img src={favIcon} alt='Favourites' />
+      </div>
 
       <input
         type="text"

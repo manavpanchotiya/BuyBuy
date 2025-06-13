@@ -56,3 +56,9 @@
   min-width: 100vh
 }
 
+.favourite_items {
+  display: flex;
+  justify-content:flex-end;
+  margin-right: 20px;
+}
+
