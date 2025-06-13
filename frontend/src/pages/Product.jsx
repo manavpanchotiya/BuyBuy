@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../../public/products_styles.css';
-import Header from '../components/Header';
 import { Link } from 'react-router-dom';
 
-
-function Product() {
+function Product({ searchTerm, category, searchSubmitted }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [category, setCategory] = useState("");
   const [flashMessage, setFlashMessage] = useState("");
   const [showFlash, setShowFlash] = useState(false);
-  const [searchSubmitted, setSearchSubmitted] = useState(false); 
 
   useEffect(() => {
     fetch('http://localhost:3000/products')
@@ -38,19 +33,14 @@ function Product() {
     );
   };
 
-  const matchesCategory = (product, category) => {
+  const matchesCategory = (product) => {
     if (!category || category === "All Categories") return true;
     return product.category?.name === category;
   };
 
   const filterProductItems = products.filter(
-    (product) =>
-      matchesSearchTerm(product) && matchesCategory(product, category)
+    (product) => matchesSearchTerm(product) && matchesCategory(product)
   );
-
-  const handleSubmit = () => {
-    setSearchSubmitted(true); 
-  };
 
   useEffect(() => {
     if (!loading && searchSubmitted) {
@@ -72,41 +62,18 @@ function Product() {
 
   return (
     <div className='main-container'>
-      <Header
-        searchTerm={searchTerm}
-        onSearchChange={(value) => {
-          setSearchTerm(value);
-          setSearchSubmitted(false); // reset
-        }}
-        category={category}
-        onCategory={(value) => {
-          setCategory(value);
-          setSearchSubmitted(false); // reset
-        }}
-        onSubmitClick={handleSubmit}
-      />
-
       {showFlash && (
         <div className="flash-alert">
           {flashMessage}
-          <button className="close-btn" onClick={() => {
-            setSearchTerm("");
-            setCategory("");
-            setSearchSubmitted(false);
-            setFlashMessage("");
-            setShowFlash(false);
-          }
-        }
-        >×</button>
+          <button className="close-btn" onClick={() => setShowFlash(false)}>×</button>
         </div>
       )}
 
       <div className='product-container'>
         {filterProductItems.map((product) => (
           <div key={product.id} style={{ border: '1px solid #ddd', margin: '1rem', padding: '1rem' }}>
-
             <Link to={`/product/${product.id}`}>
-            <img src={product.image} alt={product.name} /* style={{ width: '150px', height: '100px' }} */ />
+              <img src={product.image} alt={product.name} />
             </Link>
             <div className='product-info'>
               <span>{product.name} | Price: ${product.price_in_cents}</span> 
