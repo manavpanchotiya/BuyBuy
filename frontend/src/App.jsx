@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Footer from './components/Footer'
 import SellerProducts from './pages/Seller';
+import NewProduct from './pages/NewProductsForm';
 
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="product/:id" element={<ProductDetails/>} />
         <Route path="about" element={<About />} />
         <Route path="seller" element={<SellerProducts />} />
+        <Route path='seller/new' element={<NewProduct />} />
 
         
       </Route>
