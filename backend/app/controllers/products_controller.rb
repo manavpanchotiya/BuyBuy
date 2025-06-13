@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
     products = user.products.includes(:category)
 
     render json: products.as_json(
-      only: [:id, :name, :price_in_cents, :description, :image],
+      only: [:id, :name, :price_in_cents, :description, :image, :quantity],
       include: {
         user: { only: [:first_name] },
         category: { only: [:name] }

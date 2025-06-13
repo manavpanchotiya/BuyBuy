@@ -75,7 +75,7 @@ export default function Product() {
             }}
             aria-label="Close error message"
           >
-            ×
+            
           </button>
         </div>
       )}
