@@ -30,7 +30,7 @@ export default function ProductDetails() {
                 <img src={product.image} alt={product.name} /* style={{ width: '150px', height: '100px' }} */ />
                 </Link>
                 <div className='product-info'>
-                  <span>{product.name} | Price: ${product.price_in_cents}</span> 
+                  <span>{product.name} | Price: ${(product.price_in_cents / 100).toFixed(2)}</span> 
                   <span>{product.description}</span>
                   <span>Sold by: {product.user?.first_name}</span>
                 </div>
