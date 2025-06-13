@@ -13,7 +13,6 @@ export default function Header({ searchTerm, onSearchChange, category, onCategor
         <Link to="/products">All Products</Link> |{" "}
         <Link to="/seller">My Products</Link> |{" "}
         <Link to="/login">Login</Link> |{" "}
-        <Link to="/login">Login</Link> |{" "}
         <Link to="/signup">Sign Up</Link>
       </nav>
 
