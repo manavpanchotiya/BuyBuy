@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
   get "/seller", to: "products#seller"
   get "/categories", to: "categories#index"
+  
 end

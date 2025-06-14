@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    products = Product.includes(:user, :category).all
+    products = Product.distinct.includes(:user, :category)
 
     render json: products.as_json(
       only: [:id, :name, :price_in_cents, :description, :image, :quantity], 
