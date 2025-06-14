@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import '../styles/header_styles.css';
 import favIcon from '../assets/favicon.png'; 
 
-export default function Header({ searchTerm, onSearchChange, category, onCategoryChange, onSubmitClick }) {
+export default function Header({ searchTerm, onSearchChange, category, onCategoryChange, onSubmitClick,  showSwappableOnly,
+  setShowSwappableOnly }) {
   return (
     <header className='header_layout'>
 
@@ -48,6 +49,15 @@ export default function Header({ searchTerm, onSearchChange, category, onCategor
       >
         Search
       </button>
+
+      <label style={{ marginLeft: '1rem' }}>
+  <input
+    type="checkbox"
+    checked={showSwappableOnly}
+    onChange={(e) => setShowSwappableOnly(e.target.checked)}
+  />
+  Swappable only
+</label>
 
     </header>
   );

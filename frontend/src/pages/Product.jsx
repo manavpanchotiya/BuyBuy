@@ -5,7 +5,7 @@ import '../styles/products_styles.css'
 
 export default function Product() {
   // Get search/filter props and control state from Layout via useOutletContext
-  const { searchTerm, category, searchSubmitted, setSearchSubmitted } = useOutletContext();
+  const { searchTerm, category, searchSubmitted, setSearchSubmitted, showSwappableOnly} = useOutletContext();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,14 +13,17 @@ export default function Product() {
   const [showFlash, setShowFlash] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:3000/products')
+    const endpoint = showSwappableOnly
+     ? 'http://localhost:3000/products?swappable=true'
+     :'http://localhost:3000/products';
+    fetch(endpoint)
       .then(res => res.json())
       .then(data => {
         setProducts(data);
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, []);
+  }, [showSwappableOnly]);
 
   // Filter products based on search and category
   const filtered = products.filter(product => {
@@ -94,7 +97,8 @@ export default function Product() {
               />
             </Link>
             <span> {product.name} | {product.description} </span>
-            <span>Quantity:{product.quantity} | Sold by: {product.user?.first_name}</span>
+            <span>{product.quantity} item left </span>
+            <p>Sold by: {product.user?.first_name}</p>
             <p>Price: ${(product.price_in_cents / 100).toFixed(2)}</p>
           </div>
         ))}

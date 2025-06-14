@@ -6,6 +6,7 @@ export default function Layout() {
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
   const [searchSubmitted, setSearchSubmitted] = useState(false);
+  const [showSwappableOnly, setShowSwappableOnly] = useState(false);
 
   const handleSearchChange = (value) => {
     setSearchTerm(value);
@@ -29,11 +30,13 @@ export default function Layout() {
         category={category}
         onCategoryChange={handleCategoryChange}
         onSubmitClick={handleSubmit}
+        showSwappableOnly={showSwappableOnly}
+        setShowSwappableOnly={setShowSwappableOnly}
       />
 
       {/* Pass props to nested routes (Product) */}
       <Outlet
-        context={{ searchTerm, category, searchSubmitted, setSearchSubmitted }}
+        context={{ searchTerm, category, searchSubmitted, setSearchSubmitted, showSwappableOnly}}
       />
     </>
   );
