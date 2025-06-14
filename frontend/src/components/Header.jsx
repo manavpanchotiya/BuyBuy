@@ -13,7 +13,8 @@ export default function Header({ searchTerm, onSearchChange, category, onCategor
         <Link to="/products">All Products</Link> |{" "}
         <Link to="/seller">My Products</Link> |{" "}
         <Link to="/login">Login</Link> |{" "}
-        <Link to="/signup">Sign Up</Link>
+        <Link to="/signup">Sign Up</Link> | {" "}
+        <Link to="/admin">Admin</Link>
       </nav>
 
       <div className='favourite_items'>

@@ -10,7 +10,8 @@ import Footer from './components/Footer'
 import SellerProducts from './pages/Seller';
 import NewProduct from './pages/NewProductsForm';
 import AdminDashboard from './pages/AdminDashboard';
-
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -37,6 +38,8 @@ export default function App() {
         <Route path="seller" element={<SellerProducts />} />
         <Route path='seller/new' element={<NewProduct/>} />
         <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
 
         
       </Route>
