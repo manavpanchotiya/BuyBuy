@@ -1,7 +1,6 @@
-// frontend/src/pages/ChatPage.jsx
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import cable from "../cable"; // 👈 Make sure this exists
+import cable from "../cable"; 
 import '../styles/chat_styles.css';
 
 export default function ChatPage({ currentUserId, receiverId }) {
@@ -60,7 +59,7 @@ export default function ChatPage({ currentUserId, receiverId }) {
         receiver_id: receiverId,
         content: content.trim(),
       })
-    .catch((err) => console.error("❌ Failed to save message:", err));
+    .catch((err) => console.error("Failed to save message:", err));
 
     setContent("");
   };
