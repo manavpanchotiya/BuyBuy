@@ -3,7 +3,8 @@ import ChatPage from "../pages/ChatPage";
 
 const ChatWrapper = () => {
   const { receiverId } = useParams();
-  const currentUserId = 1; // hardcoded for now
+  const searchParams = new URLSearchParams(window.location.search);
+  const currentUserId = parseInt(searchParams.get("user_id") || 1);
 
   return (
     <ChatPage

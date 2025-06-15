@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import cable from "../cable"; // 👈 Make sure this exists
+import '../styles/chat_styles.css';
 
 export default function ChatPage({ currentUserId, receiverId }) {
   const [messages, setMessages] = useState([]);
@@ -26,6 +27,7 @@ export default function ChatPage({ currentUserId, receiverId }) {
       },
       {
         received: (data) => {
+          console.log("Received visa ActionaCable", data);
           setMessages((prev) => [...prev, data]);
         },
       }
@@ -51,6 +53,14 @@ export default function ChatPage({ currentUserId, receiverId }) {
       receiver_id: receiverId,
       content: content.trim(),
     });
+
+    axios
+      .post("/api/chats", {
+        sender_id: currentUserId,
+        receiver_id: receiverId,
+        content: content.trim(),
+      })
+    .catch((err) => console.error("❌ Failed to save message:", err));
 
     setContent("");
   };
