@@ -26,7 +26,7 @@ export default function ChatPage({ currentUserId, receiverId }) {
       },
       {
         received: (data) => {
-          console.log("Received visa ActionaCable", data);
+          console.log("Received via ActionaCable", data);
           setMessages((prev) => [...prev, data]);
         },
       }

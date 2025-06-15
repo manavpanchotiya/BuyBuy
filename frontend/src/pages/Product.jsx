@@ -85,21 +85,24 @@ export default function Product() {
 
       <div className="product-container">
         {filtered.map(product => (
-          <div
+          <div className='product_info'
             key={product.id}
-            style={{ border: '1px solid #ddd', padding: '1rem', borderRadius: '4px' }}
+            /* style={{ border: '1px solid #ddd', padding: '1rem', borderRadius: '4px' }} */
           >
             <Link to={`/product/${product.id}`}>
-              <img
+              <img className='product_img'
                 src={product.image}
                 alt={product.name}
-                style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px' }}
+                /* style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px' }} */
               />
             </Link>
+            <div className='texts'>
             <span> {product.name} | {product.description} </span>
             <span>{product.quantity} item left </span>
-            <p>Sold by: {product.user?.first_name}</p>
-            <p>Price: ${(product.price_in_cents / 100).toFixed(2)}</p>
+            <p className='check_line_height'>Sold by: {product.user?.first_name} <br />
+            Availaible in {product.location} <br />
+            Price: ${(product.price_in_cents / 100).toFixed(2)}</p>
+            </div>
           </div>
         ))}
       </div>

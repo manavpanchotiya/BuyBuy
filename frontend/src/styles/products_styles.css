@@ -4,44 +4,35 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 1rem;
-  border-radius: 8px;
   margin: 0 auto;
+  border: 1px solid ghostwhite;
+  margin-top: 30px;
+  padding-top: 20px;
 
 }
 
-.product-container img {
-  width: 250px;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  object-position: center;
+.product_info {
+  border:1px solid #ddd;
+   padding: 1rem;
+   border-radius: 4px;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   font-size: 18px;
 }
 
-.product-info {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
+.product_img {
+  width: 100%; 
+  height: 180px; 
+  object-fit: cover;
+  border: none;
+  box-shadow: 1px 0px 1px rgba(0, 0, 0, 0.1);
+  margin-top: 0 auto;
+}
+
+.texts {
   text-align: center;
 }
 
-.flash-alert {
-  background-color: #ffe0e0;
-  color: #a33;
-  padding: 1rem;
-  margin: 1rem;
-  border: 1px solid #f5c2c2;
-  border-radius: 4px;
-  position: relative;
-  width: 450px;
+.check_line_height {
+  line-height: 1;
 }
 
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-  color: #a33;
-}

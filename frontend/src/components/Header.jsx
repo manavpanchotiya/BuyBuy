@@ -21,15 +21,17 @@ export default function Header({ searchTerm, onSearchChange, category, onCategor
         <img src={favIcon} alt='Favourites' />
       </div>
 
+
       <input
+      className='search-input'
         type="text"
         value={searchTerm}
         placeholder="Search by seller or location"
         onChange={(e) => onSearchChange(e.target.value)}
-        style={{ padding: '0.5rem', marginRight: '1rem', width: '250px' }}
       />
 
       <select
+        className='filter-dropdown'
         value={category}
         onChange={(e) => onCategoryChange(e.target.value)}
         style={{ padding: '0.5rem', marginRight: '1rem' }}
@@ -43,6 +45,7 @@ export default function Header({ searchTerm, onSearchChange, category, onCategor
       </select>
 
       <button
+        className='search_button '
         onClick={onSubmitClick}
         style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}
         type="button"
@@ -52,6 +55,7 @@ export default function Header({ searchTerm, onSearchChange, category, onCategor
 
       <label style={{ marginLeft: '1rem' }}>
   <input
+  
     type="checkbox"
     checked={showSwappableOnly}
     onChange={(e) => setShowSwappableOnly(e.target.checked)}
