@@ -65,35 +65,35 @@ export default function ChatPage({ currentUserId, receiverId }) {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-white">
-      <div className="flex-1 overflow-y-auto p-4" ref={chatBoxRef}>
+    <div className="chat-container">
+      <div className="messages-list" ref={chatBoxRef}>
         {messages.map((msg) => (
           <div
             key={msg.id}
-            className={`mb-3 max-w-xs px-4 py-3 rounded-xl ${
+            className={`message ${
               msg.sender_id === currentUserId
-                ? "ml-auto bg-blue-100 text-right"
-                : "mr-auto bg-gray-200 text-left"
+                ? "sent"
+                : "received"
             }`}
           >
-            <div className="text-sm font-bold">
+            <div className="username">
               {msg.sender_id === currentUserId ? "You" : "User " + msg.sender_id}
             </div>
             <div className="text-base">{msg.content}</div>
-            <div className="text-xs text-gray-500 mt-1">{msg.created_at}</div>
+            <div className="timestamp">{msg.created_at}</div>
           </div>
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="p-4 border-t flex gap-2">
+      <form onSubmit={handleSubmit} className="input-group">
         <textarea
           rows={2}
-          className="flex-1 p-2 border rounded resize-none"
+          className="message-input"
           placeholder="Type a message..."
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        <button className="bg-blue-600 text-white px-4 py-2 rounded" type="submit">
+        <button className="send-button" type="submit">
           Send
         </button>
       </form>

@@ -1,4 +1,3 @@
-/* src/styles/chat.css */
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -10,6 +9,8 @@
   flex-grow: 1;
   overflow-y: auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .message {
@@ -18,52 +19,51 @@
   padding: 12px;
   border-radius: 16px;
   position: relative;
+  word-wrap: break-word;
 }
 
 .sent {
   align-self: flex-end;
   background-color: #007bff;
   color: white;
+  border-bottom-right-radius: 0;
 }
 
 .received {
   align-self: flex-start;
   background-color: #e9ecef;
-}
-
-.content {
-  word-wrap: break-word;
+  color: #333;
+  border-bottom-left-radius: 0;
 }
 
 .timestamp {
-  font-size: 0.8em;
+  font-size: 0.75rem;
   opacity: 0.7;
   margin-top: 4px;
-  display: block;
 }
 
 .username {
   font-weight: bold;
-  margin-right: 8px;
-  color: #666;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 4px;
 }
 
 .input-group {
-  position: fixed;
-  bottom: 20px;
-  width: calc(100% - 40px);
+  display: flex;
   padding: 20px;
   background-color: white;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  border-top: 1px solid #ccc;
 }
 
 .message-input {
-  width: 80%;
+  flex: 1;
   height: 40px;
-  padding: 12px;
+  padding: 10px 14px;
   border: 1px solid #ddd;
   border-radius: 20px;
   resize: none;
+  font-size: 1rem;
 }
 
 .send-button {
