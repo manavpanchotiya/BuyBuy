@@ -31,6 +31,7 @@ export default function Product() {
     const endpoint = showSwappableOnly
       ? 'http://localhost:3000/products?swappable=true'
       : 'http://localhost:3000/products';
+
     fetch(endpoint)
       .then((res) => res.json())
       .then((data) => {
@@ -43,7 +44,7 @@ export default function Product() {
   const filtered = products.filter((product) => {
     const searchMatch =
       product.user?.first_name
-        .toLowerCase()
+        ?.toLowerCase()
         .includes(searchTerm.toLowerCase()) ||
       product.user?.user_location
         ?.toLowerCase()
@@ -79,7 +80,7 @@ export default function Product() {
     );
 
   return (
-    <Box sx={{ px: 3, py: 2 }}>
+    <Box sx={{ px: { xs: 2, sm: 3 }, py: 2 }}>
       {showFlash && (
         <Alert
           severity="warning"
@@ -108,32 +109,77 @@ export default function Product() {
             <Card
               component={Link}
               to={`/product/${product.id}`}
-              sx={{ textDecoration: 'none', height: '100%' }}
+              sx={{
+                textDecoration: 'none',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                transition: 'transform 0.2s ease',
+                '&:hover': {
+                  transform: 'scale(1.02)',
+                },
+              }}
             >
               <CardMedia
                 component="img"
-                height="180"
                 image={product.image}
                 alt={product.name}
-                sx={{ objectFit: 'cover' }}
+                sx={{ 
+                  height: 180,
+                  width: '100%',
+                  objectFit: 'contain',
+                  objectPosition: 'center',
+                  backgroundColor: '#f5f5f5',
+                  
+                }}
               />
-              <CardContent>
-                <Typography variant="subtitle1" fontWeight="bold" gutterBottom noWrap>
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography
+                  variant="subtitle1"
+                  fontWeight="bold"
+                  gutterBottom
+                  sx={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
                   {product.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" noWrap>
+
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    mb: 1,
+                  }}
+                >
                   {product.description}
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+
+                <Typography variant="body2" sx={{ mb: 0.5 }}>
                   {product.quantity} item{product.quantity > 1 ? 's' : ''} left
                 </Typography>
-                <Typography variant="body2">
+
+                <Typography variant="body2" sx={{ mb: 0.5 }}>
                   Sold by: {product.user?.first_name}
                 </Typography>
-                <Typography variant="body2">
-                  Available in: {product.location || 'Unknown'}
+
+                <Typography variant="body2" sx={{ mb: 0.5 }}>
+                  Available in: {product.user?.user_location || 'Unknown'}
                 </Typography>
-                <Typography variant="body2" fontWeight="600" color="primary" sx={{ mt: 1 }}>
+
+                <Typography
+                  variant="body2"
+                  fontWeight={600}
+                  color="primary"
+                  sx={{ mt: 1 }}
+                >
                   ${(product.price_in_cents / 100).toFixed(2)}
                 </Typography>
               </CardContent>

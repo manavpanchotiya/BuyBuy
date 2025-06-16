@@ -89,9 +89,15 @@ export default function AdminDashboard({ user }) {
               <Card>
                 <CardMedia
                   component="img"
-                  height="140"
                   image={product.image}
                   alt={product.name}
+                  sx={{ 
+                    height: 180,
+                    width: '100%',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                    backgroundColor: '#f5f5f5'
+                  }}
                 />
                 <CardContent>
                   <Typography variant="h6">{product.name}</Typography>

@@ -50,6 +50,28 @@ function SellerProducts() {
     );
   };
 
+  const handleDelete = (productId) => {
+  if (!window.confirm("Are you sure you want to delete this product?")) return;
+
+  const token = localStorage.getItem("token");
+
+  fetch(`http://localhost:3000/products/${productId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Failed to delete product");
+      // Remove product from state
+      setProducts((prev) => prev.filter((p) => p.id !== productId));
+    })
+    .catch((err) => {
+      alert("Error deleting product: " + err.message);
+    });
+};
+
+
   if (loading)
     return (
       <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
@@ -98,9 +120,15 @@ function SellerProducts() {
             <Card>
               <CardMedia
                 component="img"
-                height="140"
                 image={product.image}
                 alt={product.name}
+                sx={{ 
+                  height: 180,
+                  width: '100%',
+                  objectFit: 'contain',
+                  objectPosition: 'center',
+                  backgroundColor: '#f5f5f5'
+                }}
               />
               <CardContent>
                 <Typography variant="h6">{product.name}</Typography>
@@ -117,13 +145,21 @@ function SellerProducts() {
                 {product.quantity > 0 && (
                   <Button
                     variant="outlined"
-                    color="error"
+                    color="warning"
                     size="small"
                     onClick={() => handleMarkSoldOut(product.id)}
                   >
                     Mark as Sold Out
                   </Button>
                 )}
+                <Button
+                  variant="contained"
+                  color="error"
+                  size="small"
+                  onClick={() => handleDelete(product.id)}
+                >
+                  Delete
+                </Button>
               </CardActions>
             </Card>
           </Grid>
