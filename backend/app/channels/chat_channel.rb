@@ -17,6 +17,7 @@ class ChatChannel < ApplicationCable::Channel
         content: message.content,
         sender_id: message.sender_id,
         receiver_id: message.receiver_id,
+        sender_name: message.sender.first_name,
         created_at: message.created_at.strftime("%Y-%m-%d %H:%M")
       }
     )
