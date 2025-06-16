@@ -77,7 +77,7 @@ export default function ChatPage({ currentUserId, receiverId }) {
             }`}
           >
             <div className="username">
-              {msg.sender_id === currentUserId ? "You" : "User " + msg.sender_id}
+              {msg.sender_id === currentUserId ? "You" : msg.sender_name}
             </div>
             <div className="text-base">{msg.content}</div>
             <div className="timestamp">{msg.created_at}</div>
