@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../components/Header';
 
-export default function Layout() {
+export default function Layout({ user, onLogout }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
   const [searchSubmitted, setSearchSubmitted] = useState(false);
@@ -25,6 +25,8 @@ export default function Layout() {
   return (
     <>
       <Header
+        user={user}
+        onLogout={onLogout}
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
         category={category}

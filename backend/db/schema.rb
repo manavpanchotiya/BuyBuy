@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_11_165534) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_16_024236) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_11_165534) do
     t.index ["sender_id"], name: "index_chats_on_sender_id"
   end
 
+  create_table "favourites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_favourites_on_product_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -46,18 +55,23 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_11_165534) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "user_email"
-    t.string "user_password"
+    t.string "email"
     t.string "first_name"
     t.string "last_name"
     t.string "user_type"
-    t.string "user_location"
+    t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.string "auth_token"
+    t.boolean "admin", default: false, null: false
+    t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
   end
 
   add_foreign_key "chats", "users", column: "receiver_id"
   add_foreign_key "chats", "users", column: "sender_id"
+  add_foreign_key "favourites", "products"
+  add_foreign_key "favourites", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users"
 end

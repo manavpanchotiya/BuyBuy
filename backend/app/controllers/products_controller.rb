@@ -1,8 +1,11 @@
 class ProductsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show, :seller]
+
   def index
-    products = Product.includes(:user, :category)
+    products = Product.distinct.includes(:user, :category)
     products = products.where(swappable: true) if params[:swappable] == 'true'
   
+
     render json: products.as_json(
       only: [:id, :name, :description, :quantity, :price_in_cents, :image, :swappable],
       include: {
@@ -15,7 +18,6 @@ class ProductsController < ApplicationController
 
   def show
     product = Product.includes(:user, :category).find(params[:id])
-  
     render json: product.as_json(
       only: [:id, :name, :price_in_cents, :description, :image, :quantity,],
       include: {
@@ -32,18 +34,38 @@ class ProductsController < ApplicationController
                      .limit(4)
     render json: similar, include: :user
   end
-  
 
   def seller
-    user = User.find(1)
-    products = user.products.includes(:category)
+    if current_user.nil?
+      render json: { error: "Not authorized" }, status: :unauthorized
+    else
+      products = current_user.products.includes(:category)
+      render json: products.as_json(
+        only: [:id, :name, :price_in_cents, :description, :image, :quantity],
+        include: {
+          user: { only: [:first_name] },
+          category: { only: [:name] }
+        }
+      )
+    end
+  end
 
-    render json: products.as_json(
-      only: [:id, :name, :price_in_cents, :description, :image, :quantity],
-      include: {
-        user: { only: [:first_name] },
-        category: { only: [:name] }
-      }
-    )
+  def create
+    if current_user.nil?
+      render json: { error: "Not authorized" }, status: :unauthorized
+    else
+      product = current_user.products.build(product_params)
+      if product.save
+        render json: product, status: :created
+      else
+        render json: { errors: product.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:name, :description, :price_in_cents, :image, :quantity, :category_id)
   end
 end
