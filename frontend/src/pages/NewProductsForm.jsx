@@ -8,15 +8,23 @@ function NewProduct() {
     price_in_cents: '',
     image: '',
     category_id: '',
-    user_id: 3,
   });
 
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:3000/categories')
-      .then((res) => res.json())
+    const token = localStorage.getItem('token');
+
+    fetch('http://localhost:3000/categories', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to load categories');
+        return res.json();
+      })
       .then((data) => setCategories(data))
       .catch((err) => console.error('Error loading categories:', err));
   }, []);
@@ -28,15 +36,19 @@ function NewProduct() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Form validation: Ensure required fields are filled
     if (!formData.name || !formData.price_in_cents || !formData.category_id) {
-      alert("Please fill in all required fields.");
+      alert('Please fill in all required fields.');
       return;
     }
 
+    const token = localStorage.getItem('token');
+
     fetch('http://localhost:3000/products', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(formData),
     })
       .then((res) => {
@@ -45,7 +57,7 @@ function NewProduct() {
       })
       .then(() => {
         alert('Product created successfully!');
-        navigate('/seller'); 
+        navigate('/seller');
       })
       .catch((err) => {
         console.error('Error:', err);
@@ -57,12 +69,34 @@ function NewProduct() {
     <div>
       <h2>Add New Product</h2>
       <form onSubmit={handleSubmit} style={{ maxWidth: '400px' }}>
-        <input name="name" placeholder="Name" onChange={handleChange} required /><br />
-        <input name="description" placeholder="Description" onChange={handleChange} /><br />
-        <input name="price_in_cents" placeholder="Price in cents" onChange={handleChange} required /><br />
-        <input name="image" placeholder="Image URL" onChange={handleChange} /><br />
-        
-        <select name="category_id" onChange={handleChange} required>
+        <input
+          name="name"
+          placeholder="Name"
+          onChange={handleChange}
+          required
+        /><br />
+        <input
+          name="description"
+          placeholder="Description"
+          onChange={handleChange}
+        /><br />
+        <input
+          name="price_in_cents"
+          placeholder="Price in cents"
+          onChange={handleChange}
+          required
+        /><br />
+        <input
+          name="image"
+          placeholder="Image URL"
+          onChange={handleChange}
+        /><br />
+
+        <select
+          name="category_id"
+          onChange={handleChange}
+          required
+        >
           <option value="">Select category</option>
           {categories.map((cat) => (
             <option key={cat.id} value={cat.id}>

@@ -7,7 +7,13 @@ function SellerProducts() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/seller')
+  const token = localStorage.getItem("token");
+
+    fetch('http://localhost:3000/seller', {
+    headers: {
+      Authorization: `Bearer ${token}`,  // fixed here
+      },  
+      })
       .then((res) => {
         if (!res.ok) throw new Error('Network response was not ok');
         return res.json();
@@ -34,7 +40,7 @@ function SellerProducts() {
 
   if (loading) return <p>Loading seller products...</p>;
   if (error) return <p>Error loading seller products: {error}</p>;
-  if (products.length === 0) return <p>No products found for this seller.</p>;
+  if (products.length === 0) return <p>You don't have any listed products.</p>;
 
   return (
     <div className="seller-product-container">
