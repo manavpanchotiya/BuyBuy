@@ -1,77 +1,122 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/header_styles.css';
-import favIcon from '../assets/favicon.png'; 
+import { Link as RouterLink } from 'react-router-dom';
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Typography,
+  Button,
+  InputBase,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Checkbox,
+  FormControlLabel,
+  IconButton,
+} from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import BuyBuyLogo from '../components/BuyBuyLogo';
 
-export default function Header({ user, onLogout, searchTerm, onSearchChange, category, onCategoryChange, onSubmitClick, showSwappableOnly }) {
+export default function Header({
+  user,
+  onLogout,
+  searchTerm,
+  onSearchChange,
+  category,
+  onCategoryChange,
+  onSubmitClick,
+  showSwappableOnly,
+  onSwappableChange,
+}) {
   return (
-    <header className='header_layout'>
-      <img className="header-img" src=".././assets/sampleHeader.png" alt="Buybuy" />
-      
-      <nav className="nav-links">
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/products">All Products</Link> |{" "}
-        <Link to="/seller">My Products</Link> |{" "}
-        {user ? (
-          <>
-            <span>Welcome, {user.first_name}</span> |{" "}
-            <button onClick={onLogout} style={{ cursor: 'pointer' }}>
-              Logout
-            </button> |{" "}
-          </>
-        ) : (
-          <>
-            <Link to="/login">Login</Link> |{" "}
-            <Link to="/signup">Sign Up</Link> |{" "}
-          </>
-        )}
-        <Link to="/admin">Admin</Link> |{" "}
-        <Link to="/favourites">
-          <img src={favIcon} alt="Favourites" className="fav_icon_nav" />
-        </Link>
-      </nav>
-
-      <input
-      className='search-input'
-        type="text"
-        value={searchTerm}
-        placeholder="Search by seller or location"
-        onChange={(e) => onSearchChange(e.target.value)}
-      />
-
-      <select
-        className='filter-dropdown'
-        value={category}
-        onChange={(e) => onCategoryChange(e.target.value)}
-        style={{ padding: '0.5rem', marginRight: '1rem' }}
+    <AppBar position="static" color="transparent" elevation={1} sx={{ mb: 3 }}>
+      <Toolbar
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 1,
+          px: { xs: 1, sm: 3 },
+        }}
       >
-        <option value="">All Categories</option>
-        <option value="Automobiles">Automobiles</option>
-        <option value="Clothing">Clothing</option>
-        <option value="Electronics">Electronics</option>
-        <option value="Home & Garden">Home & Garden</option>
-        <option value="Toys">Toys</option>
-      </select>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <BuyBuyLogo />
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
+            <Button component={RouterLink} to="/" color="inherit" size="small">Home</Button>
+            <Button component={RouterLink} to="/products" color="inherit" size="small">All Products</Button>
+            <Button component={RouterLink} to="/seller" color="inherit" size="small">My Products</Button>
+            {user ? (
+              <>
+                <Typography variant="body2" sx={{ mx: 1 }}>
+                  Welcome, {user.first_name}
+                </Typography>
+                <Button onClick={onLogout} color="inherit" size="small">Logout</Button>
+              </>
+            ) : (
+              <>
+                <Button component={RouterLink} to="/login" color="inherit" size="small">Login</Button>
+                <Button component={RouterLink} to="/signup" color="inherit" size="small">Sign Up</Button>
+              </>
+            )}
+            <Button component={RouterLink} to="/admin" color="inherit" size="small">Admin</Button>
+            <IconButton component={RouterLink} to="/favourites" color="inherit" size="small" aria-label="favourites">
+              <FavoriteIcon />
+            </IconButton>
+          </Box>
+        </Box>
 
-      <button
-        className='search_button '
-        onClick={onSubmitClick}
-        style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}
-        type="button"
-      >
-        Search
-      </button>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap', flexGrow: 1, maxWidth: 600 }}>
+          <InputBase
+            placeholder="Search by seller or location"
+            value={searchTerm}
+            onChange={(e) => onSearchChange(e.target.value)}
+            startAdornment={<SearchIcon sx={{ mr: 1, color: 'grey.600' }} />}
+            sx={{
+              flexGrow: 1,
+              border: '1px solid',
+              borderColor: 'grey.300',
+              borderRadius: 1,
+              px: 1,
+              py: 0.5,
+            }}
+          />
 
-      <label style={{ marginLeft: '1rem' }}>
-  <input
-  
-    type="checkbox"
-    checked={showSwappableOnly}
-    onChange={(e) => setShowSwappableOnly(e.target.checked)}
-  />
-  Swappable only
-</label>
+          <FormControl size="small" sx={{ minWidth: 140 }}>
+            <InputLabel id="category-label">Category</InputLabel>
+            <Select
+              labelId="category-label"
+              value={category}
+              label="Category"
+              onChange={(e) => onCategoryChange(e.target.value)}
+            >
+              <MenuItem value="">All Categories</MenuItem>
+              <MenuItem value="Automobiles">Automobiles</MenuItem>
+              <MenuItem value="Clothing">Clothing</MenuItem>
+              <MenuItem value="Electronics">Electronics</MenuItem>
+              <MenuItem value="Home & Garden">Home & Garden</MenuItem>
+              <MenuItem value="Toys">Toys</MenuItem>
+            </Select>
+          </FormControl>
 
-    </header>
+          <Button variant="contained" onClick={onSubmitClick} sx={{ whiteSpace: 'nowrap' }}>
+            Search
+          </Button>
+
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={showSwappableOnly}
+                onChange={(e) => onSwappableChange(e.target.checked)}
+                color="primary"
+              />
+            }
+            label="Swappable only"
+            sx={{ ml: 1 }}
+          />
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }

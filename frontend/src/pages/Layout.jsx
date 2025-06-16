@@ -33,7 +33,8 @@ export default function Layout({ user, onLogout }) {
         onCategoryChange={handleCategoryChange}
         onSubmitClick={handleSubmit}
         showSwappableOnly={showSwappableOnly}
-        setShowSwappableOnly={setShowSwappableOnly}
+        onSwappableChange={setShowSwappableOnly}
+        
       />
 
       {/* Pass props to nested routes (Product) */}

@@ -1,5 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Button,
+  Grid,
+} from "@mui/material";
 
 function SellerProducts() {
   const [products, setProducts] = useState([]);
@@ -7,15 +19,15 @@ function SellerProducts() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-  const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-    fetch('http://localhost:3000/seller', {
-    headers: {
-      Authorization: `Bearer ${token}`,  // fixed here
-      },  
-      })
+    fetch("http://localhost:3000/seller", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => {
-        if (!res.ok) throw new Error('Network response was not ok');
+        if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
       })
       .then((data) => {
@@ -23,47 +35,101 @@ function SellerProducts() {
         setLoading(false);
       })
       .catch((err) => {
-        setError(err.message || 'Error fetching seller products');
+        setError(err.message || "Error fetching seller products");
         setLoading(false);
       });
   }, []);
 
   const handleMarkSoldOut = (productId) => {
-    if (!window.confirm('Mark this item as sold out?')) return;
-  
+    if (!window.confirm("Mark this item as sold out?")) return;
+
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
         product.id === productId ? { ...product, quantity: 0 } : product
-      ));
-    };
+      )
+    );
+  };
 
+  if (loading)
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+        <CircularProgress />
+      </Box>
+    );
 
-  if (loading) return <p>Loading seller products...</p>;
-  if (error) return <p>Error loading seller products: {error}</p>;
-  if (products.length === 0) return <p>You don't have any listed products.</p>;
+  if (error) return <Alert severity="error">{error}</Alert>;
+
+  if (products.length === 0)
+    return (
+      <Box sx={{ p: 3, textAlign: "center" }}>
+        <Typography variant="h6" gutterBottom>
+          You don't have any listed products.
+        </Typography>
+        <Button
+          component={Link}
+          to="/seller/new"
+          variant="contained"
+          color="primary"
+        >
+          Add New Item
+        </Button>
+      </Box>
+    );
 
   return (
-    <div className="seller-product-container">
-      <h2>My Listings</h2>
-      <Link to="/seller/new">
-        <button>Add New Item</button>
-      </Link>
+    <Box sx={{ p: 3 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 3,
+        }}
+      >
+        <Typography variant="h4">My Listings</Typography>
+        <Button component={Link} to="/seller/new" variant="contained" color="primary">
+          Add New Item
+        </Button>
+      </Box>
 
-    {products.map((product) => (
-      <div key={product.id} style={{ border: '1px solid #ddd', margin: '1rem', padding: '1rem' }}>
-        <img src={product.image} alt={product.name} style={{ width: '150px', height: '100px' }} />
-        <div className="product-info">
-          <h4>{product.name}</h4>
-          <p>Price: ${(product.price_in_cents /100).toFixed(2)}</p>
-          {product.quantity === 0 ? (
-          <p style={{ color: 'red' }}>Sold Out</p>
-        ) : (
-          <button onClick={() => handleMarkSoldOut(product.id)}>Mark as Sold Out</button>
-        )}
-    </div>
-  </div>
-))}
-    </div>
+      <Grid container spacing={3}>
+        {products.map((product) => (
+          <Grid item xs={12} sm={6} md={4} key={product.id}>
+            <Card>
+              <CardMedia
+                component="img"
+                height="140"
+                image={product.image}
+                alt={product.name}
+              />
+              <CardContent>
+                <Typography variant="h6">{product.name}</Typography>
+                <Typography color="text.secondary">
+                  Price: ${(product.price_in_cents / 100).toFixed(2)}
+                </Typography>
+                {product.quantity === 0 ? (
+                  <Typography color="error" sx={{ mt: 1, fontWeight: "bold" }}>
+                    Sold Out
+                  </Typography>
+                ) : null}
+              </CardContent>
+              <CardActions>
+                {product.quantity > 0 && (
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    size="small"
+                    onClick={() => handleMarkSoldOut(product.id)}
+                  >
+                    Mark as Sold Out
+                  </Button>
+                )}
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 }
 

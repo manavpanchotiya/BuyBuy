@@ -18,8 +18,8 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
   const [user, setUser] = useState(null);
+  const [showSwappableOnly, setShowSwappableOnly] = React.useState(false);
 
-  // On app load, check for token and fetch /me
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -42,7 +42,6 @@ export default function App() {
       });
   }, []);
 
-  // Logout handler
   const handleLogout = () => {
     const token = localStorage.getItem('token');
     fetch('http://localhost:3000/logout', {
@@ -58,13 +57,11 @@ export default function App() {
       .catch(console.error);
   };
 
-  // Signup handler
   const handleSignup = (userData) => {
     console.log("User signed up:", userData);
     setUser(userData);
   };
 
-  // ChatRouteWrapper inside App to access `user`
   function ChatRouteWrapper() {
     const { receiverId } = useParams();
 
@@ -81,35 +78,45 @@ export default function App() {
   }
 
   return (
-    <div className='main_container'> 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Layout
-              user={user}
-              onLogout={handleLogout}
-              searchTerm={searchTerm}
-              category={category}
-              onSearchChange={setSearchTerm}
-              onCategoryChange={setCategory}
-            />
-          }
-        >
-          <Route index element={<Home />} />
-          <Route path="products" element={<Product searchTerm={searchTerm} category={category} />} />
-          <Route path="product/:id" element={<ProductDetails />} />
-          <Route path="about" element={<About />} />
-          <Route path="seller" element={<SellerProducts />} />
-          <Route path="seller/new" element={<NewProduct />} />
-          <Route path="admin" element={<AdminDashboard user={user} />} />
-          <Route path="login" element={<Login onLogin={setUser} />} />
-          <Route path="signup" element={<Signup onSignup={handleSignup} />} />
-          <Route path="favourites" element={<FavouritesPage />} />
-          <Route path="chats/:receiverId" element={<ChatRouteWrapper user={user} />} />
-        </Route>
-      </Routes>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
+      {/* Main content grows to fill space */}
+      <main style={{ flexGrow: 1 }}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Layout
+                user={user}
+                onLogout={handleLogout}
+                searchTerm={searchTerm}
+                category={category}
+                onSearchChange={setSearchTerm}
+                onCategoryChange={setCategory}
+              />
+            }
+          >
+            <Route index element={<Home />} />
+            <Route path="products" element={<Product searchTerm={searchTerm} category={category} />} />
+            <Route path="product/:id" element={<ProductDetails />} />
+            <Route path="about" element={<About />} />
+            <Route path="seller" element={<SellerProducts />} />
+            <Route path="seller/new" element={<NewProduct />} />
+            <Route path="admin" element={<AdminDashboard user={user} />} />
+            <Route path="login" element={<Login onLogin={setUser} />} />
+            <Route path="signup" element={<Signup onSignup={handleSignup} />} />
+            <Route path="favourites" element={<FavouritesPage />} />
+            <Route path="chats/:receiverId" element={<ChatRouteWrapper user={user} />} />
+          </Route>
+        </Routes>
+      </main>
 
+      {/* Footer sticks at bottom if content is short */}
       <Footer />
     </div>
   );

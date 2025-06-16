@@ -1,113 +1,184 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Typography,
+  TextField,
+  Select,
+  MenuItem,
+  Button,
+  FormControl,
+  InputLabel,
+  Box,
+} from "@mui/material";
 
 function NewProduct() {
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    price_in_cents: '',
-    image: '',
-    category_id: '',
+    name: "",
+    description: "",
+    price_in_cents: "",
+    image: "",
+    category_id: "",
   });
-
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    fetch('http://localhost:3000/categories', {
+    const token = localStorage.getItem("token");
+    fetch("http://localhost:3000/categories", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => {
-        if (!res.ok) throw new Error('Failed to load categories');
+        if (!res.ok) throw new Error("Failed to load categories");
         return res.json();
       })
       .then((data) => setCategories(data))
-      .catch((err) => console.error('Error loading categories:', err));
+      .catch((err) => console.error("Error loading categories:", err));
   }, []);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.price_in_cents || !formData.category_id) {
-      alert('Please fill in all required fields.');
+    if (
+      !formData.name.trim() ||
+      !formData.price_in_cents.trim() ||
+      !formData.category_id.trim()
+    ) {
+      alert("Please fill in all required fields.");
       return;
     }
 
-    const token = localStorage.getItem('token');
+    const payload = {
+      ...formData,
+      price_in_cents: parseInt(formData.price_in_cents, 10),
+      category_id: parseInt(formData.category_id, 10),
+    };
 
-    fetch('http://localhost:3000/products', {
-      method: 'POST',
+    if (isNaN(payload.price_in_cents) || payload.price_in_cents < 0) {
+      alert("Please enter a valid positive price.");
+      return;
+    }
+
+    setLoading(true);
+
+    const token = localStorage.getItem("token");
+    fetch("http://localhost:3000/products", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(payload),
     })
       .then((res) => {
-        if (!res.ok) throw new Error('Failed to create product');
+        setLoading(false);
+        if (!res.ok) throw new Error("Failed to create product");
         return res.json();
       })
       .then(() => {
-        alert('Product created successfully!');
-        navigate('/seller');
+        alert("Product created successfully!");
+        navigate("/seller");
       })
       .catch((err) => {
-        console.error('Error:', err);
-        alert('Error creating product');
+        setLoading(false);
+        console.error("Error:", err);
+        alert("Error creating product");
       });
   };
 
   return (
-    <div>
-      <h2>Add New Product</h2>
-      <form onSubmit={handleSubmit} style={{ maxWidth: '400px' }}>
-        <input
-          name="name"
-          placeholder="Name"
-          onChange={handleChange}
-          required
-        /><br />
-        <input
-          name="description"
-          placeholder="Description"
-          onChange={handleChange}
-        /><br />
-        <input
-          name="price_in_cents"
-          placeholder="Price in cents"
-          onChange={handleChange}
-          required
-        /><br />
-        <input
-          name="image"
-          placeholder="Image URL"
-          onChange={handleChange}
-        /><br />
+    <Box
+      maxWidth={400}
+      mx="auto"
+      my={3}
+      p={2}
+      component="form"
+      onSubmit={handleSubmit}
+      autoComplete="off"
+      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+    >
+      <Typography variant="h4" component="h1" textAlign="center" mb={2}>
+        Add New Product
+      </Typography>
 
-        <select
+      <TextField
+        label="Name *"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+        fullWidth
+        autoFocus
+      />
+
+      <TextField
+        label="Description"
+        name="description"
+        value={formData.description}
+        onChange={handleChange}
+        multiline
+        rows={3}
+        fullWidth
+      />
+
+      <TextField
+        label="Price in cents *"
+        name="price_in_cents"
+        type="number"
+        inputProps={{ min: 0 }}
+        value={formData.price_in_cents}
+        onChange={handleChange}
+        required
+        fullWidth
+      />
+
+      <TextField
+        label="Image URL"
+        name="image"
+        value={formData.image}
+        onChange={handleChange}
+        fullWidth
+      />
+
+      <FormControl fullWidth required>
+        <InputLabel id="category-label">Category *</InputLabel>
+        <Select
+          labelId="category-label"
           name="category_id"
+          value={formData.category_id}
+          label="Category *"
           onChange={handleChange}
-          required
         >
-          <option value="">Select category</option>
+          <MenuItem value="">
+            <em>Select category</em>
+          </MenuItem>
           {categories.map((cat) => (
-            <option key={cat.id} value={cat.id}>
+            <MenuItem key={cat.id} value={cat.id}>
               {cat.name}
-            </option>
+            </MenuItem>
           ))}
-        </select><br />
+        </Select>
+      </FormControl>
 
-        <button type="submit">Create Product</button>
-      </form>
-    </div>
+      <Button
+        type="submit"
+        variant="contained"
+        disabled={loading}
+        sx={{ py: 1.5 }}
+      >
+        {loading ? "Creating..." : "Create Product"}
+      </Button>
+    </Box>
   );
 }
 

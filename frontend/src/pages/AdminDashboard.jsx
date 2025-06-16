@@ -1,8 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Alert,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Button,
+  Grid,
+} from "@mui/material";
 
 export default function AdminDashboard({ user }) {
-  // Redirect to login if no user or not admin
   if (!user || !user.admin) {
     return <Navigate to="/login" replace />;
   }
@@ -12,79 +23,97 @@ export default function AdminDashboard({ user }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    fetch('http://localhost:3000/admin', {
+    const token = localStorage.getItem("token");
+    fetch("http://localhost:3000/admin", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch products');
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch products");
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         setProducts(data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
   }, []);
 
   const handleDelete = (productId) => {
-    if (!window.confirm('Are you sure you want to delete this item?')) return;
+    if (!window.confirm("Are you sure you want to delete this item?")) return;
 
-    // Optimistically remove from UI
-    setProducts(prev => prev.filter(p => p.id !== productId));
+    setProducts((prev) => prev.filter((p) => p.id !== productId));
 
-    // Call backend to delete
     fetch(`http://localhost:3000/products/${productId}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`, // if needed
-      }
-    }).catch(err => {
-      alert('Failed to delete product');
-      // Optionally revert UI state here
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).catch(() => {
+      alert("Failed to delete product");
+      // Optional: revert UI change here
     });
   };
 
-  if (loading) return <p>Loading products...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading)
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+        <CircularProgress />
+      </Box>
+    );
+
+  if (error) return <Alert severity="error">{error}</Alert>;
 
   return (
-    <div className="admin-dashboard" style={{ padding: '1rem' }}>
-      <h1>Hello, Admin {user.first_name}</h1>
-      <p>Current Listings: {products.length}</p>
-      <p>Current Categories: 5</p>
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h4" gutterBottom>
+        Hello, {user.first_name}
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+        Current Listings: {products.length}
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+        Current Categories: 5
+      </Typography>
 
-      <div>
-        {products.length === 0 && <p>No products found.</p>}
-
-        {products.map(product => (
-          <div
-            key={product.id}
-            style={{ border: '1px solid #ddd', margin: '1rem 0', padding: '1rem' }}
-          >
-            <img
-              src={product.image}
-              alt={product.name}
-              style={{ width: '150px', height: '100px', objectFit: 'cover' }}
-            />
-            <div>
-              <h4>{product.name}</h4>
-              <p>Price: ${(product.price_in_cents / 100).toFixed(2)}</p>
-              <button
-                style={{ backgroundColor: 'red', color: 'white', cursor: 'pointer' }}
-                onClick={() => handleDelete(product.id)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+      {products.length === 0 ? (
+        <Typography>No products found.</Typography>
+      ) : (
+        <Grid container spacing={3}>
+          {products.map((product) => (
+            <Grid item xs={12} sm={6} md={4} key={product.id}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={product.image}
+                  alt={product.name}
+                />
+                <CardContent>
+                  <Typography variant="h6">{product.name}</Typography>
+                  <Typography color="text.secondary">
+                    Price: ${(product.price_in_cents / 100).toFixed(2)}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => handleDelete(product.id)}
+                    size="small"
+                  >
+                    Delete
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
+    </Box>
   );
 }

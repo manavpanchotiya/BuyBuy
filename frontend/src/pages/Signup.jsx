@@ -1,87 +1,127 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  Alert,
+} from "@mui/material";
 
 export default function Signup({ onSignup }) {
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [location, setLocation] = useState('');
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+  const [errorMsg, setErrorMsg] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMsg(null);
 
-    const res = await fetch("http://localhost:3000/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        user: {
-          email,
-          password,
-          password_confirmation: password,
-          first_name: fname,
-          last_name: lname,
-          location,
-        }
-      }),
-    });
+    try {
+      const res = await fetch("http://localhost:3000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user: {
+            email,
+            password,
+            password_confirmation: password,
+            first_name: fname,
+            last_name: lname,
+            location,
+          },
+        }),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (res.ok) {
-      // Save token from backend response to localStorage
-      localStorage.setItem('token', data.token);
-
-      // Pass user info up to parent component if needed
-      onSignup(data.user);
-
-      // Redirect user to products page after signup
-      navigate("/products");
-    } else {
-      alert(data.error || "Signup failed");
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        onSignup(data.user);
+        navigate("/products");
+      } else {
+        setErrorMsg(data.error || "Signup failed");
+      }
+    } catch (error) {
+      setErrorMsg("Network error. Please try again.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Sign Up</h2>
-      <input
-        type="text"
-        placeholder="Enter your first name"
-        value={fname}
-        onChange={(e) => setFname(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Enter your last name"
-        value={lname}
-        onChange={(e) => setLname(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Enter your password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Enter your city"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        required
-      />
-      <button type="submit">Sign up</button>
-    </form>
+    <Box
+      component={Paper}
+      elevation={4}
+      sx={{
+        maxWidth: 400,
+        mx: "auto",
+        mt: 8,
+        p: 4,
+        display: "flex",
+        flexDirection: "column",
+        gap: 3,
+      }}
+    >
+      <Typography variant="h4" component="h1" textAlign="center" fontWeight="bold">
+        Sign Up
+      </Typography>
+
+      {errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+        <TextField
+          label="First Name"
+          type="text"
+          required
+          fullWidth
+          value={fname}
+          onChange={(e) => setFname(e.target.value)}
+        />
+
+        <TextField
+          label="Last Name"
+          type="text"
+          required
+          fullWidth
+          value={lname}
+          onChange={(e) => setLname(e.target.value)}
+        />
+
+        <TextField
+          label="Email"
+          type="email"
+          required
+          fullWidth
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <TextField
+          label="Password"
+          type="password"
+          required
+          fullWidth
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <TextField
+          label="City"
+          type="text"
+          required
+          fullWidth
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+
+        <Button type="submit" variant="contained" size="large" fullWidth>
+          Sign Up
+        </Button>
+      </form>
+    </Box>
   );
 }
