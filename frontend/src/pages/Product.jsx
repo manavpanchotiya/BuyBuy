@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
-import '../styles/products_styles.css'
-
+import {
+  Box,
+  Typography,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Alert,
+  IconButton,
+  CircularProgress,
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Product() {
-  // Get search/filter props and control state from Layout via useOutletContext
-  const { searchTerm, category, searchSubmitted, setSearchSubmitted, showSwappableOnly} = useOutletContext();
+  const {
+    searchTerm,
+    category,
+    searchSubmitted,
+    setSearchSubmitted,
+    showSwappableOnly,
+  } = useOutletContext();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,36 +29,38 @@ export default function Product() {
 
   useEffect(() => {
     const endpoint = showSwappableOnly
-     ? 'http://localhost:3000/products?swappable=true'
-     :'http://localhost:3000/products';
+      ? 'http://localhost:3000/products?swappable=true'
+      : 'http://localhost:3000/products';
     fetch(endpoint)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setProducts(data);
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, [showSwappableOnly]);
 
-  // Filter products based on search and category
-  const filtered = products.filter(product => {
+  const filtered = products.filter((product) => {
     const searchMatch =
-      product.user?.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.user?.user_location?.toLowerCase().includes(searchTerm.toLowerCase());
+      product.user?.first_name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      product.user?.user_location
+        ?.toLowerCase()
+        .includes(searchTerm.toLowerCase());
 
-    const categoryMatch = !category || category === '' || product.category?.name === category;
+    const categoryMatch =
+      !category || category === '' || product.category?.name === category;
 
-    // If searchTerm is empty, just filter by category
     return searchTerm ? searchMatch && categoryMatch : categoryMatch;
   });
 
-  // Effect to show flash error message if search yields no results after submit
   useEffect(() => {
     if (!loading && searchSubmitted) {
       if (filtered.length === 0) {
         setFlashMessage(
           `No product found for "${searchTerm || 'your search'}"${
-            category ? ` in category "${category}"` : ""
+            category ? ` in category "${category}"` : ''
           }. Please try again.`
         );
         setShowFlash(true);
@@ -54,58 +71,76 @@ export default function Product() {
     }
   }, [filtered.length, searchSubmitted, searchTerm, category, loading]);
 
-  if (loading) return <p>Loading products...</p>;
+  if (loading)
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
+        <CircularProgress />
+      </Box>
+    );
 
   return (
-    <div>
+    <Box sx={{ px: 3, py: 2 }}>
       {showFlash && (
-        <div style={{ backgroundColor: '#fcc', padding: '0.5rem', marginBottom: '1rem', borderRadius: '4px' }}>
+        <Alert
+          severity="warning"
+          action={
+            <IconButton
+              onClick={() => {
+                setFlashMessage('');
+                setShowFlash(false);
+                setSearchSubmitted(false);
+              }}
+              size="small"
+              color="inherit"
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }
+          sx={{ mb: 2 }}
+        >
           {flashMessage}
-          <button
-            onClick={() => {
-              setFlashMessage('');
-              setShowFlash(false);
-              setSearchSubmitted(false);
-            }}
-            style={{
-              marginLeft: '1rem',
-              cursor: 'pointer',
-              background: 'transparent',
-              border: 'none',
-              fontWeight: 'bold',
-              fontSize: '1.2rem',
-              lineHeight: '1',
-            }}
-            aria-label="Close error message"
-          >
-            
-          </button>
-        </div>
+        </Alert>
       )}
 
-      <div className="product-container">
-        {filtered.map(product => (
-          <div className='product_info'
-            key={product.id}
-            /* style={{ border: '1px solid #ddd', padding: '1rem', borderRadius: '4px' }} */
-          >
-            <Link to={`/product/${product.id}`}>
-              <img className='product_img'
-                src={product.image}
+      <Grid container spacing={3}>
+        {filtered.map((product) => (
+          <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+            <Card
+              component={Link}
+              to={`/product/${product.id}`}
+              sx={{ textDecoration: 'none', height: '100%' }}
+            >
+              <CardMedia
+                component="img"
+                height="180"
+                image={product.image}
                 alt={product.name}
-                /* style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px' }} */
+                sx={{ objectFit: 'cover', borderRadius: 1 }}
               />
-            </Link>
-            <div className='texts'>
-            <span> {product.name} | {product.description} </span>
-            <span>{product.quantity} item left </span>
-            <p className='check_line_height'>Sold by: {product.user?.first_name} <br />
-            Availaible in {product.location} <br />
-            Price: ${(product.price_in_cents / 100).toFixed(2)}</p>
-            </div>
-          </div>
+              <CardContent>
+                <Typography variant="subtitle1" fontWeight="bold" gutterBottom noWrap>
+                  {product.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" noWrap>
+                  {product.description}
+                </Typography>
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  {product.quantity} item{product.quantity > 1 ? 's' : ''} left
+                </Typography>
+                <Typography variant="body2">
+                  Sold by: {product.user?.first_name}
+                </Typography>
+                <Typography variant="body2">
+                  Available in: {product.location || 'Unknown'}
+                </Typography>
+                <Typography variant="body2" fontWeight="600" color="primary" sx={{ mt: 1 }}>
+                  ${(product.price_in_cents / 100).toFixed(2)}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
-      </div>
-    </div>
+      </Grid>
+    </Box>
   );
 }

@@ -88,7 +88,7 @@ function SellerProducts() {
       >
         <Typography variant="h4">My Listings</Typography>
         <Button component={Link} to="/seller/new" variant="contained" color="primary">
-          Add New Item
+          Sell on BuyBuy
         </Button>
       </Box>
 
