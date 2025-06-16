@@ -83,6 +83,8 @@ export default function App() {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
+        backgroundColor: '#f5f5f5'
+
       }}
     >
       {/* Main content grows to fill space */}
