@@ -17,7 +17,12 @@ export default function Header({
   onSwappableChange,
 }) {
   return (
-    <AppBar position="static" color="transparent" elevation={1} sx={{ mb: 3 }}>
+    <AppBar 
+      position="static" 
+      color="transparent" 
+      elevation={1} 
+      sx={{ mb: 3, border: '1px solid', borderColor: 'grey.300', borderRadius: 5 }}
+    >
       <Toolbar
         sx={{
           display: 'flex',
@@ -25,6 +30,7 @@ export default function Header({
           flexWrap: 'wrap',
           gap: 1,
           px: { xs: 1, sm: 3 },
+          
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -65,7 +71,7 @@ export default function Header({
               flexGrow: 1,
               border: '1px solid',
               borderColor: 'grey.300',
-              borderRadius: 1,
+              borderRadius: 5,
               px: 1,
               py: 0.5,
             }}

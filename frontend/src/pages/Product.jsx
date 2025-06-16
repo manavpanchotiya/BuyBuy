@@ -130,6 +130,7 @@ export default function Product() {
                   objectFit: 'contain',
                   objectPosition: 'center',
                   backgroundColor: '#f5f5f5',
+                  
                 }}
               />
               <CardContent sx={{ flexGrow: 1 }}>

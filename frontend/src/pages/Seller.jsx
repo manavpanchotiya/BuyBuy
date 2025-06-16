@@ -127,7 +127,8 @@ function SellerProducts() {
                   width: '100%',
                   objectFit: 'contain',
                   objectPosition: 'center',
-                  backgroundColor: '#f5f5f5'
+                  backgroundColor: '#f5f5f5',
+                  
                 }}
               />
               <CardContent>
