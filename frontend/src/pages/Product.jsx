@@ -115,7 +115,7 @@ export default function Product() {
                 height="180"
                 image={product.image}
                 alt={product.name}
-                sx={{ objectFit: 'cover', borderRadius: 1 }}
+                sx={{ objectFit: 'cover' }}
               />
               <CardContent>
                 <Typography variant="subtitle1" fontWeight="bold" gutterBottom noWrap>

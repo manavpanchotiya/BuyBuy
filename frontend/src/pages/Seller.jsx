@@ -27,7 +27,7 @@ function SellerProducts() {
       },
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Network response was not ok");
+        if (!res.ok) throw new Error("Please log in to view your products");
         return res.json();
       })
       .then((data) => {
