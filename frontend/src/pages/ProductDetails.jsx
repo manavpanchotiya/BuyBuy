@@ -9,7 +9,6 @@ import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
   Divider,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -20,7 +19,12 @@ export default function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [similarPhotos, setSimilarPhotos] = useState([]);
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [favLoading, setFavLoading] = useState(false);
 
+  const token = localStorage.getItem("token");
+
+  // Fetch product details
   useEffect(() => {
     setLoading(true);
     fetch(`http://localhost:3000/products/${id}`)
@@ -38,6 +42,7 @@ export default function ProductDetails() {
       });
   }, [id]);
 
+  // Fetch similar products
   useEffect(() => {
     if (!product) return;
 
@@ -56,12 +61,77 @@ export default function ProductDetails() {
       .catch((err) => console.error(err));
   }, [product]);
 
+  // Check if product is favorited
+  useEffect(() => {
+    if (!token || !product) return;
+
+    fetch("http://localhost:3000/favourites", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((favourites) => {
+        setIsFavorited(favourites.some((fav) => fav.id === product.id));
+      })
+      .catch(console.error);
+  }, [product, token]);
+
+  // Toggle favorite state handler
+  const toggleFavorite = () => {
+    if (!token) {
+      alert("Please login to save favorites");
+      return;
+    }
+
+    setFavLoading(true);
+
+    if (!isFavorited) {
+      // Add to favorites
+      fetch("http://localhost:3000/favourites", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ product_id: product.id }),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to add favorite");
+          setIsFavorited(true);
+        })
+        .catch((err) => {
+          console.error(err);
+          alert("Failed to add favorite");
+        })
+        .finally(() => setFavLoading(false));
+    } else {
+      // Remove from favorites
+      fetch(`http://localhost:3000/favourites/${product.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to remove favorite");
+          setIsFavorited(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          alert("Failed to remove favorite");
+        })
+        .finally(() => setFavLoading(false));
+    }
+  };
+
   if (loading)
     return (
       <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
         <CircularProgress />
       </Box>
     );
+
   if (!product)
     return (
       <Typography variant="h6" align="center" sx={{ mt: 5 }}>
@@ -85,7 +155,14 @@ export default function ProductDetails() {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6} display="flex" flexDirection="column" justifyContent="space-between">
+        <Grid
+          item
+          xs={12}
+          md={6}
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+        >
           <Box>
             <Typography variant="h5" fontWeight="600" gutterBottom>
               {product.name}
@@ -106,12 +183,14 @@ export default function ProductDetails() {
 
           <Box sx={{ mt: 4, display: "flex", gap: 2 }}>
             <Button
-              variant="outlined"
+              variant={isFavorited ? "contained" : "outlined"}
+              color="error"
               startIcon={<FavoriteIcon />}
               sx={{ flex: 1 }}
-              // Add your onClick handler for saving favorite here
+              onClick={toggleFavorite}
+              disabled={favLoading}
             >
-              Save
+              {isFavorited ? "Saved" : "Save"}
             </Button>
 
             <Button

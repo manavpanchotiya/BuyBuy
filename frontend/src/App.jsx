@@ -103,14 +103,14 @@ export default function App() {
           >
             <Route index element={<Home />} />
             <Route path="products" element={<Product searchTerm={searchTerm} category={category} />} />
-            <Route path="product/:id" element={<ProductDetails />} />
+            <Route path="product/:id" element={<ProductDetails currentUserId={user?.id} />} />
             <Route path="about" element={<About />} />
             <Route path="seller" element={<SellerProducts />} />
             <Route path="seller/new" element={<NewProduct />} />
             <Route path="admin" element={<AdminDashboard user={user} />} />
             <Route path="login" element={<Login onLogin={setUser} />} />
             <Route path="signup" element={<Signup onSignup={handleSignup} />} />
-            <Route path="favourites" element={<FavouritesPage />} />
+            <Route path="favourites" element={<FavouritesPage user={user} />} />
             <Route path="chats/:receiverId" element={<ChatRouteWrapper user={user} />} />
           </Route>
         </Routes>

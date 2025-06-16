@@ -48,11 +48,12 @@ function NewProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Submit clicked", formData);
 
     if (
       !formData.name.trim() ||
-      !formData.price_in_cents.trim() ||
-      !formData.category_id.trim()
+      !formData.price_in_cents ||
+      !formData.category_id
     ) {
       alert("Please fill in all required fields.");
       return;
