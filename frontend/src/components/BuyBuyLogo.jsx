@@ -24,7 +24,7 @@ export default function BuyBuyLogo() {
           color: '#ff5722',
           ml: 0.5,
           textTransform: 'uppercase',
-          letterSpacing: 2,
+          letterSpacing: 1,
         }}
       >
         BUY
