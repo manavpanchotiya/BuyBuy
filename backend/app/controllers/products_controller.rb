@@ -5,11 +5,10 @@ class ProductsController < ApplicationController
     products = Product.distinct.includes(:user, :category)
     products = products.where(swappable: true) if params[:swappable] == 'true'
   
-
     render json: products.as_json(
       only: [:id, :name, :description, :quantity, :price_in_cents, :image, :swappable],
       include: {
-        user: { only: [:first_name, :user_location] },
+        user: { only: [:id, :first_name, :user_location] },  # added :id here
         category: { only: [:name] }
       }
     )
@@ -19,9 +18,9 @@ class ProductsController < ApplicationController
   def show
     product = Product.includes(:user, :category).find(params[:id])
     render json: product.as_json(
-      only: [:id, :name, :price_in_cents, :description, :image, :quantity,],
+      only: [:id, :name, :price_in_cents, :description, :image, :quantity],
       include: {
-        user: { only: [:first_name, :user_location] },
+        user: { only: [:id, :first_name, :user_location] },  # added :id here
         category: { only: [:name] }
       }
     )
@@ -43,7 +42,7 @@ class ProductsController < ApplicationController
       render json: products.as_json(
         only: [:id, :name, :price_in_cents, :description, :image, :quantity],
         include: {
-          user: { only: [:first_name] },
+          user: { only: [:id, :first_name] },  # added :id here
           category: { only: [:name] }
         }
       )
