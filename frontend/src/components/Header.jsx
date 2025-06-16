@@ -28,7 +28,9 @@ export default function Header({
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          
           <BuyBuyLogo />
+          
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
             <Button component={RouterLink} to="/" color="inherit" size="small">Home</Button>
             <Button component={RouterLink} to="/products" color="inherit" size="small">All Products</Button>
