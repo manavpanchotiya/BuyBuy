@@ -106,7 +106,7 @@ export default function Product() {
 
       <Grid container spacing={4}>
         {filtered.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
+          <Grid item key={product.id} xs={12} sm={4} md={4} lg={4}>
 
             <Paper
               component={Link}
