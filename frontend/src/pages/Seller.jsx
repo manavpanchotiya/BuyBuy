@@ -59,7 +59,7 @@ function SellerProducts() {
 
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3000/product/${productId}`, {
+    fetch(`http://localhost:3000/products/${productId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
