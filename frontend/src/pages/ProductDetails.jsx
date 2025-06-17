@@ -224,10 +224,15 @@ export default function ProductDetails() {
               >
                 <CardMedia
                   component="img"
-                  height="180"
                   image={photo.image}
                   alt={photo.name}
-                  sx={{ objectFit: "cover" }}
+                  sx={{ 
+                    height: 180,
+                    width: '100%',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                    backgroundColor: '#f5f5f5'
+                  }}
                 />
                 <CardContent>
                   <Typography variant="subtitle1" fontWeight="600" noWrap>

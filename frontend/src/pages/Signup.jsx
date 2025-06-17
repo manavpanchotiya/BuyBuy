@@ -64,6 +64,7 @@ export default function Signup({ onSignup }) {
         display: "flex",
         flexDirection: "column",
         gap: 3,
+        borderRadius: 5,
       }}
     >
       <Typography variant="h4" component="h1" textAlign="center" fontWeight="bold">

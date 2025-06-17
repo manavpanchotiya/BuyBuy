@@ -1,20 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  Typography,
-  Button,
-  InputBase,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Checkbox,
-  FormControlLabel,
-  IconButton,
-} from '@mui/material';
+import { AppBar,  Toolbar, Box, Typography, Button, InputBase, Select, MenuItem, FormControl, InputLabel, Checkbox, FormControlLabel, IconButton,} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BuyBuyLogo from '../components/BuyBuyLogo';
@@ -31,7 +17,12 @@ export default function Header({
   onSwappableChange,
 }) {
   return (
-    <AppBar position="static" color="transparent" elevation={1} sx={{ mb: 3 }}>
+    <AppBar 
+      position="static" 
+      color="transparent" 
+      elevation={1} 
+      sx={{ mb: 3, border: '1px solid', borderColor: 'grey.300', borderRadius: 5, zIndex: (theme) => theme.zIndex.appBar + 1, }}
+    >
       <Toolbar
         sx={{
           display: 'flex',
@@ -39,10 +30,13 @@ export default function Header({
           flexWrap: 'wrap',
           gap: 1,
           px: { xs: 1, sm: 3 },
+          
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          
           <BuyBuyLogo />
+          
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
             <Button component={RouterLink} to="/" color="inherit" size="small">Home</Button>
             <Button component={RouterLink} to="/products" color="inherit" size="small">All Products</Button>
@@ -77,7 +71,7 @@ export default function Header({
               flexGrow: 1,
               border: '1px solid',
               borderColor: 'grey.300',
-              borderRadius: 1,
+              borderRadius: 5,
               px: 1,
               py: 0.5,
             }}

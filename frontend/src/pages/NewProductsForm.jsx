@@ -18,6 +18,7 @@ function NewProduct() {
     price_in_cents: "",
     image: "",
     category_id: "",
+    quantity: 1, // default quantity
   });
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -53,9 +54,11 @@ function NewProduct() {
     if (
       !formData.name.trim() ||
       !formData.price_in_cents ||
-      !formData.category_id
+      !formData.category_id ||
+      formData.quantity === "" || 
+      formData.quantity < 0
     ) {
-      alert("Please fill in all required fields.");
+      alert("Please fill in all required fields and valid quantity.");
       return;
     }
 
@@ -63,10 +66,16 @@ function NewProduct() {
       ...formData,
       price_in_cents: parseInt(formData.price_in_cents, 10),
       category_id: parseInt(formData.category_id, 10),
+      quantity: parseInt(formData.quantity, 10), // ensure quantity is integer
     };
 
     if (isNaN(payload.price_in_cents) || payload.price_in_cents < 0) {
       alert("Please enter a valid positive price.");
+      return;
+    }
+
+    if (isNaN(payload.quantity) || payload.quantity < 0) {
+      alert("Please enter a valid non-negative quantity.");
       return;
     }
 
@@ -138,6 +147,17 @@ function NewProduct() {
         type="number"
         inputProps={{ min: 0 }}
         value={formData.price_in_cents}
+        onChange={handleChange}
+        required
+        fullWidth
+      />
+
+      <TextField
+        label="Quantity *"
+        name="quantity"
+        type="number"
+        inputProps={{ min: 0 }}
+        value={formData.quantity}
         onChange={handleChange}
         required
         fullWidth
