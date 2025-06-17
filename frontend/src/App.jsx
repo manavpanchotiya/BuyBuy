@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import Layout from './pages/Layout';
 import Product from './pages/Product';
 import ProductDetails from './pages/ProductDetails';
@@ -19,6 +19,8 @@ export default function App() {
   const [category, setCategory] = useState('');
   const [user, setUser] = useState(null);
   const [showSwappableOnly, setShowSwappableOnly] = React.useState(false);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -53,6 +55,7 @@ export default function App() {
       .then(() => {
         localStorage.removeItem('token');
         setUser(null);
+        navigate('/products');
       })
       .catch(console.error);
   };
