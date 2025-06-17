@@ -9,7 +9,7 @@ import {
   Alert,
   IconButton,
   CircularProgress,
-  Stack,
+  Stack, Tooltip,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -106,7 +106,8 @@ export default function Product() {
 
       <Grid container spacing={4}>
         {filtered.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+          <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
+
             <Paper
               component={Link}
               to={`/product/${product.id}`}
@@ -154,6 +155,7 @@ export default function Product() {
                 >
                   {product.name}
                 </Typography>
+                
 
                 <Typography
                   variant="body2"
