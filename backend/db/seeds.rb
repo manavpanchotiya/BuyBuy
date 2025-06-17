@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # Users
-# Users
 u1 = User.create!(email: "alice@example.com", password: "password1", first_name: "Alice", last_name: "Johnson", location: "Toronto")
 u2 = User.create!(email: "bob@example.com", password: "password2", first_name: "Bob", last_name: "Smith", location: "Vancouver")
 u3 = User.create!(email: "carol@example.com", password: "password3", first_name: "Carol", last_name: "Lee", location: "Montreal")
@@ -17,7 +16,7 @@ u7 = User.create!(email: "grace@example.com", password: "password7", first_name:
 u8 = User.create!(email: "henry@example.com", password: "password8", first_name: "Henry", last_name: "Clark", location: "Halifax")
 u9 = User.create!(email: "ivy@example.com", password: "password9", first_name: "Ivy", last_name: "Martin", location: "Quebec City")
 u10 = User.create!(email: "jack@example.com", password: "password10", first_name: "Jack", last_name: "Wright", location: "Regina")
-u11 = User.create!(email: "admin@email.com", password:"admin123", first_name: "Admin", last_name: "Admin", location: "Global", admin: true)
+u11 = User.create!(email: "admin@buybuy.com", password:"admin123", first_name: "Admin", last_name: "Admin", location: "Global", admin: true)
 u12 = User.create!(email: "lisa@example.com", password: "password12", first_name: "Lisa", last_name: "Reynolds", location: "Saskatoon")
 u13 = User.create!(email: "mark@example.com", password: "password13", first_name: "Mark", last_name: "Anderson", location: "Red Deer")
 u14 = User.create!(email: "nina@example.com", password: "password14", first_name: "Nina", last_name: "Lopez", location: "Kelowna")
@@ -80,7 +79,7 @@ Chat.create!(sender_id: u1.id, receiver_id: u2.id, content: "Hi Bob, I am intere
 Chat.create!(sender_id: u2.id, receiver_id: u1.id, content: "Hey Alice, yes it’s available!")
 Chat.create!(sender_id: u3.id, receiver_id: u4.id, content: "Dave, is the garden tool set still for sale?")
 Chat.create!(sender_id: u4.id, receiver_id: u3.id, content: "Yes Carol, you can pick it up this weekend.")
-Chat.create!(sender_id: u5.id, receiver_id: u1.id, content: "Is the building blocks set still available?") # Corrected missing content
+Chat.create!(sender_id: u5.id, receiver_id: u1.id, content: "Is the building blocks set still available?")
 Chat.create!(sender_id: u6.id, receiver_id: u7.id, content: "Grace, your Civic listing looks nice.")
 Chat.create!(sender_id: u7.id, receiver_id: u6.id, content: "Thanks Frank, it's still available.")
 Chat.create!(sender_id: u8.id, receiver_id: u9.id, content: "Henry, interested in a coat trade?")
@@ -88,7 +87,7 @@ Chat.create!(sender_id: u9.id, receiver_id: u8.id, content: "Sure Ivy, let’s c
 Chat.create!(sender_id: u10.id, receiver_id: u5.id, content: "Eve, the RC car looks great!")
 Chat.create!(sender_id: u12.id, receiver_id: u13.id, content: "Hey Mark, can you ship the bike to Saskatoon?")
 Chat.create!(sender_id: u13.id, receiver_id: u12.id, content: "Yes Lisa, shipping available.")
-Chat.create!(sender_id: u14.id, receiver_id: u15.id, content: "Omar, are the storybooks suitable for 5-year-olds?") # Assumed context based on previous product naming
+Chat.create!(sender_id: u14.id, receiver_id: u15.id, content: "Omar, are the storybooks suitable for 5-year-olds?") 
 Chat.create!(sender_id: u15.id, receiver_id: u14.id, content: "Yes Nina, perfect for early readers.")
-Chat.create!(sender_id: u16.id, receiver_id: u12.id, content: "Lisa, interested in a swap for the fiction books?") # Assumed context based on previous product naming
+Chat.create!(sender_id: u16.id, receiver_id: u12.id, content: "Lisa, interested in a swap for the fiction books?") 
 
