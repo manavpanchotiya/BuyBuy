@@ -4,12 +4,12 @@ import {
   Box,
   Typography,
   Grid,
-  Card,
+  Paper,
   CardMedia,
-  CardContent,
   Alert,
   IconButton,
   CircularProgress,
+  Stack, Tooltip,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -31,6 +31,7 @@ export default function Product() {
     const endpoint = showSwappableOnly
       ? 'http://localhost:3000/products?swappable=true'
       : 'http://localhost:3000/products';
+
     fetch(endpoint)
       .then((res) => res.json())
       .then((data) => {
@@ -43,7 +44,7 @@ export default function Product() {
   const filtered = products.filter((product) => {
     const searchMatch =
       product.user?.first_name
-        .toLowerCase()
+        ?.toLowerCase()
         .includes(searchTerm.toLowerCase()) ||
       product.user?.user_location
         ?.toLowerCase()
@@ -73,13 +74,13 @@ export default function Product() {
 
   if (loading)
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
-        <CircularProgress />
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 8 }}>
+        <CircularProgress size={56} thickness={4.5} />
       </Box>
     );
 
   return (
-    <Box sx={{ px: 3, py: 2 }}>
+    <Box sx={{ maxWidth: 1200, mx: 'auto', px: { xs: 2, sm: 3 }, py: 3 }}>
       {showFlash && (
         <Alert
           severity="warning"
@@ -96,48 +97,104 @@ export default function Product() {
               <CloseIcon fontSize="inherit" />
             </IconButton>
           }
-          sx={{ mb: 2 }}
+          sx={{ mb: 3, fontWeight: 600 }}
+          variant="outlined"
         >
           {flashMessage}
         </Alert>
       )}
 
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         {filtered.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-            <Card
+          <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
+
+            <Paper
               component={Link}
               to={`/product/${product.id}`}
-              sx={{ textDecoration: 'none', height: '100%' }}
+              elevation={6}
+              sx={{
+                textDecoration: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                borderRadius: 3,
+                overflow: 'hidden',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                boxShadow:
+                  '0px 2px 6px rgba(0, 0, 0, 0.08), 0px 1px 3px rgba(0, 0, 0, 0.06)',
+                '&:hover': {
+                  transform: 'scale(1.03)',
+                  boxShadow:
+                    '0px 8px 20px rgba(0, 0, 0, 0.12), 0px 4px 10px rgba(0, 0, 0, 0.08)',
+                },
+              }}
             >
               <CardMedia
                 component="img"
-                height="180"
-                image={product.image}
-                alt={product.name}
-                sx={{ objectFit: 'cover' }}
+                  image={product.image}
+                  alt={product.name}
+                  sx={{ 
+                    height: 180,
+                    width: '100%',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                    backgroundColor: '#f5f5f5',
+                  }}
               />
-              <CardContent>
-                <Typography variant="subtitle1" fontWeight="bold" gutterBottom noWrap>
+              <Box sx={{ p: 2, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                <Typography
+                  variant="subtitle1"
+                  fontWeight="bold"
+                  gutterBottom
+                  sx={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                  }}
+                  title={product.name}
+                >
                   {product.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" noWrap>
+                
+
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    mb: 1,
+                    flexGrow: 1,
+                  }}
+                >
                   {product.description}
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1 }}>
-                  {product.quantity} item{product.quantity > 1 ? 's' : ''} left
-                </Typography>
-                <Typography variant="body2">
-                  Sold by: {product.user?.first_name}
-                </Typography>
-                <Typography variant="body2">
-                  Available in: {product.location || 'Unknown'}
-                </Typography>
-                <Typography variant="body2" fontWeight="600" color="primary" sx={{ mt: 1 }}>
+
+                <Stack spacing={0.5} mt={1}>
+                  <Typography variant="body2" color="text.primary">
+                    Quantity: {product.quantity}
+                  </Typography>
+
+                  <Typography variant="body2" color="text.primary">
+                    Sold by: {product.user?.first_name}
+                  </Typography>
+           
+                </Stack>
+
+                <Typography
+                  variant="h6"
+                  fontWeight={700}
+                  color="primary.main"
+                  mt={2}
+                  sx={{ letterSpacing: '0.03em' }}
+                >
                   ${(product.price_in_cents / 100).toFixed(2)}
                 </Typography>
-              </CardContent>
-            </Card>
+              </Box>
+            </Paper>
           </Grid>
         ))}
       </Grid>
