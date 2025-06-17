@@ -5,12 +5,14 @@ import {
   Typography,
   CircularProgress,
   Alert,
-  Card,
+  Paper,
   CardMedia,
   CardContent,
   CardActions,
   Button,
   Grid,
+  Stack,
+  Divider,
 } from "@mui/material";
 
 export default function AdminDashboard({ user }) {
@@ -61,32 +63,93 @@ export default function AdminDashboard({ user }) {
 
   if (loading)
     return (
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-        <CircularProgress />
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 8 }}>
+        <CircularProgress size={56} thickness={4.5} />
       </Box>
     );
 
-  if (error) return <Alert severity="error">{error}</Alert>;
+  if (error)
+    return (
+      <Box sx={{ maxWidth: 600, mx: "auto", mt: 6 }}>
+        <Alert severity="error" variant="outlined" sx={{ fontWeight: 600 }}>
+          {error}
+        </Alert>
+      </Box>
+    );
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Typography variant="h4" gutterBottom>
-        Hello, {user.first_name}
-      </Typography>
-      <Typography variant="subtitle1" gutterBottom>
-        Current Listings: {products.length}
-      </Typography>
-      <Typography variant="subtitle1" gutterBottom>
-        Current Categories: 5
-      </Typography>
+    <Box sx={{ maxWidth: 1200, mx: "auto", p: 3 }}>
+      <Stack spacing={1} mb={3}>
+        <Typography variant="h3" fontWeight={700} color="primary.dark">
+          Hello {user.first_name}!
+        </Typography>
+        
+        <Divider sx={{ mt: 1 }} />
+      </Stack>
+
+      <Stack direction={{ xs: "column", sm: "row" }} spacing={4} mb={4}>
+        <Paper
+          elevation={3}
+          sx={{
+            flex: 1,
+            p: 3,
+            textAlign: "center",
+            borderRadius: 2,
+            bgcolor: "background.paper",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+          }}
+        >
+          <Typography variant="h5" fontWeight={700} color="text.primary">
+            {products.length}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" mt={0.5}>
+            Current Listings
+          </Typography>
+        </Paper>
+
+        <Paper
+          elevation={3}
+          sx={{
+            flex: 1,
+            p: 3,
+            textAlign: "center",
+            borderRadius: 2,
+            bgcolor: "background.paper",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+          }}
+        >
+          <Typography variant="h5" fontWeight={700} color="text.primary">
+            5
+          </Typography>
+          <Typography variant="body2" color="text.secondary" mt={0.5}>
+            Categories
+          </Typography>
+        </Paper>
+      </Stack>
 
       {products.length === 0 ? (
-        <Typography>No products found.</Typography>
+        <Typography variant="h6" color="text.secondary" textAlign="center" mt={8}>
+          No products found.
+        </Typography>
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={4}>
           {products.map((product) => (
             <Grid item xs={12} sm={6} md={4} key={product.id}>
-              <Card>
+              <Paper
+                elevation={6}
+                sx={{
+                  borderRadius: 3,
+                  overflow: "hidden",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                  "&:hover": {
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+                    transform: "translateY(-5px)",
+                  },
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                }}
+              >
                 <CardMedia
                   component="img"
                   image={product.image}
@@ -96,26 +159,39 @@ export default function AdminDashboard({ user }) {
                     width: '100%',
                     objectFit: 'contain',
                     objectPosition: 'center',
-                    backgroundColor: '#f5f5f5'
+                    backgroundColor: '#f5f5f5',
                   }}
                 />
-                <CardContent>
-                  <Typography variant="h6">{product.name}</Typography>
-                  <Typography color="text.secondary">
-                    Price: ${(product.price_in_cents / 100).toFixed(2)}
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography
+                    variant="h6"
+                    fontWeight={600}
+                    gutterBottom
+                    noWrap
+                    title={product.name}
+                  >
+                    {product.name}
+                  </Typography>
+                  <Typography variant="subtitle1" color="primary.main" fontWeight={700}>
+                    ${(product.price_in_cents / 100).toFixed(2)}
                   </Typography>
                 </CardContent>
-                <CardActions>
+                <CardActions sx={{ px: 2, pb: 2 }}>
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     color="error"
-                    onClick={() => handleDelete(product.id)}
                     size="small"
+                    onClick={() => handleDelete(product.id)}
+                    fullWidth
+                    sx={{
+                      fontWeight: 600,
+                      "&:hover": { backgroundColor: "error.light", color: "white" },
+                    }}
                   >
                     Delete
                   </Button>
                 </CardActions>
-              </Card>
+              </Paper>
             </Grid>
           ))}
         </Grid>

@@ -9,11 +9,13 @@ import {
   CircularProgress,
   Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function FavouritesPage() {
   const [favourites, setFavourites] = useState([]);
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!token) {
@@ -39,7 +41,8 @@ export default function FavouritesPage() {
   }, [token]);
 
   // Handler to remove favourite
-  const handleRemove = (productId) => {
+  const handleRemove = (productId, e) => {
+    e.stopPropagation(); // prevent card click navigation
     fetch(`http://localhost:3000/favourites/${productId}`, {
       method: "DELETE",
       headers: {
@@ -49,7 +52,6 @@ export default function FavouritesPage() {
     })
       .then((res) => {
         if (!res.ok) throw new Error("Failed to remove favourite");
-        // Update UI by filtering out the removed favourite
         setFavourites((prev) => prev.filter((p) => p.id !== productId));
       })
       .catch((err) => {
@@ -80,17 +82,25 @@ export default function FavouritesPage() {
       <Grid container spacing={4}>
         {favourites.map((product) => (
           <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
-            <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+            <Card
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                cursor: "pointer",
+              }}
+              onClick={() => navigate(`/product/${product.id}`)}
+            >
               <CardMedia
                 component="img"
                 image={product.image}
                 alt={product.name}
-                sx={{ 
+                sx={{
                   height: 180,
-                  width: '100%',
-                  objectFit: 'contain',
-                  objectPosition: 'center',
-                  backgroundColor: '#f5f5f5',
+                  width: "100%",
+                  objectFit: "contain",
+                  objectPosition: "center",
+                  backgroundColor: "#f5f5f5",
                 }}
               />
               <CardContent sx={{ flexGrow: 1 }}>
@@ -107,7 +117,7 @@ export default function FavouritesPage() {
                   variant="outlined"
                   color="error"
                   sx={{ mt: 2 }}
-                  onClick={() => handleRemove(product.id)}
+                  onClick={(e) => handleRemove(product.id, e)}
                 >
                   Remove from Favourites
                 </Button>

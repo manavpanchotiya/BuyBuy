@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -17,6 +17,8 @@ function SellerProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -40,7 +42,8 @@ function SellerProducts() {
       });
   }, []);
 
-  const handleMarkSoldOut = (productId) => {
+  const handleMarkSoldOut = (productId, e) => {
+    e.stopPropagation(); // prevent card navigation
     if (!window.confirm("Mark this item as sold out?")) return;
 
     setProducts((prevProducts) =>
@@ -50,27 +53,26 @@ function SellerProducts() {
     );
   };
 
-  const handleDelete = (productId) => {
-  if (!window.confirm("Are you sure you want to delete this product?")) return;
+  const handleDelete = (productId, e) => {
+    e.stopPropagation(); // prevent card navigation
+    if (!window.confirm("Are you sure you want to delete this product?")) return;
 
-  const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-  fetch(`http://localhost:3000/products/${productId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((res) => {
-      if (!res.ok) throw new Error("Failed to delete product");
-      // Remove product from state
-      setProducts((prev) => prev.filter((p) => p.id !== productId));
+    fetch(`http://localhost:3000/product/${productId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .catch((err) => {
-      alert("Error deleting product: " + err.message);
-    });
-};
-
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to delete product");
+        setProducts((prev) => prev.filter((p) => p.id !== productId));
+      })
+      .catch((err) => {
+        alert("Error deleting product: " + err.message);
+      });
+  };
 
   if (loading)
     return (
@@ -117,18 +119,20 @@ function SellerProducts() {
       <Grid container spacing={3}>
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card>
+            <Card
+              sx={{ cursor: "pointer" }}
+              onClick={() => navigate(`/product/${product.id}`)}
+            >
               <CardMedia
                 component="img"
                 image={product.image}
                 alt={product.name}
-                sx={{ 
+                sx={{
                   height: 180,
-                  width: '100%',
-                  objectFit: 'contain',
-                  objectPosition: 'center',
-                  backgroundColor: '#f5f5f5',
-                  
+                  width: "100%",
+                  objectFit: "contain",
+                  objectPosition: "center",
+                  backgroundColor: "#f5f5f5",
                 }}
               />
               <CardContent>
@@ -148,7 +152,7 @@ function SellerProducts() {
                     variant="outlined"
                     color="warning"
                     size="small"
-                    onClick={() => handleMarkSoldOut(product.id)}
+                    onClick={(e) => handleMarkSoldOut(product.id, e)}
                   >
                     Mark as Sold Out
                   </Button>
@@ -157,7 +161,7 @@ function SellerProducts() {
                   variant="contained"
                   color="error"
                   size="small"
-                  onClick={() => handleDelete(product.id)}
+                  onClick={(e) => handleDelete(product.id, e)}
                 >
                   Delete
                 </Button>
