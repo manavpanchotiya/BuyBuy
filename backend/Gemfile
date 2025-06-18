@@ -58,5 +58,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'vite_rails'
 gem 'rack-cors'
 gem 'rack', '< 3.0'
+gem 'cgi', '>= 0.3.3'
+gem 'erb', '~> 4.0.4'
+
 
 gem 'dotenv-rails', groups: [:development, :test, :production]

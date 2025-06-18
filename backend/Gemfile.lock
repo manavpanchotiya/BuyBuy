@@ -296,7 +296,9 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  cgi (>= 0.3.3)
   dotenv-rails
+  erb (~> 4.0.4)
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)
