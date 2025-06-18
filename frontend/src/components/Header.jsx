@@ -39,22 +39,22 @@ export default function Header({
           
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
             {/* <Button component={RouterLink} to="/" color="inherit" size="small">Home</Button> */}
-            <Button component={RouterLink} to="/products" color="inherit" size="small">Home</Button>
-            <Button component={RouterLink} to="/seller" color="inherit" size="small">My Products</Button>
+            <Button component={RouterLink} to="/products" color="inherit" size="small">| Home | </Button>
+            <Button component={RouterLink} to="/seller" color="inherit" size="small">| My Products |</Button>
             {user ? (
               <>
                 <Typography variant="body2" sx={{ mx: 1 }}>
-                  Welcome, {user.first_name}
+                  | Welcome, {user.first_name} |
                 </Typography>
-                <Button onClick={onLogout} color="inherit" size="small">Logout</Button>
+                <Button onClick={onLogout} color="inherit" size="small">| Logout |</Button>
               </>
             ) : (
               <>
-                <Button component={RouterLink} to="/login" color="inherit" size="small">Login</Button>
-                <Button component={RouterLink} to="/signup" color="inherit" size="small">Sign Up</Button>
+                <Button component={RouterLink} to="/login" color="inherit" size="small">| Login |</Button>
+                <Button component={RouterLink} to="/signup" color="inherit" size="small">| Sign Up |</Button>
               </>
             )}
-            <Button component={RouterLink} to="/admin" color="inherit" size="small">Admin</Button>
+            <Button component={RouterLink} to="/admin" color="inherit" size="small">| Admin |</Button>
             <IconButton component={RouterLink} to="/favourites" color="inherit" size="small" aria-label="favourites">
               <FavoriteIcon />
             </IconButton>

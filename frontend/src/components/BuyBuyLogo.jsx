@@ -8,14 +8,19 @@ export default function BuyBuyLogo() {
         display: 'inline-flex',
         alignItems: 'center',
         fontWeight: 'bold',
-        fontSize: '1.8rem',
         fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
-        color: '#1976d2',
         userSelect: 'none',
         cursor: 'default',
       }}
     >
-      <Typography component="span" sx={{ color: '#1976d2' }}>
+      <Typography
+        component="span"
+        sx={{
+          color: '#1976d2',
+          fontSize: '1.8rem',
+          // fontWeight: 'bold',
+        }}
+      >
         Buy
       </Typography>
       <Typography
@@ -25,6 +30,8 @@ export default function BuyBuyLogo() {
           ml: 0.5,
           textTransform: 'uppercase',
           letterSpacing: 1,
+          fontSize: '1.8rem',
+          fontWeight: 'bold',
         }}
       >
         BUY
