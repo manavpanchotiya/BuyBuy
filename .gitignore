@@ -22,6 +22,8 @@ vendor/bundle/
 public/assets/
 public/packs/
 storage/
+.env
+.env.production
 
 # === Node/Vite (frontend) ===
 node_modules/
