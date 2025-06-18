@@ -210,7 +210,7 @@ export default function ProductDetails() {
       <Divider sx={{ my: 5 }} />
 
       {/* Similar Products */}
-      <Box>
+      <Box sx={{ maxWidth: '1200px', mx: 'auto', mt: 5, px:2}}>
         <Typography variant="h6" fontWeight="600" gutterBottom>
           Similar Products by Location, Category, or the same Seller
         </Typography>
@@ -220,7 +220,7 @@ export default function ProductDetails() {
               <Card
                 component={Link}
                 to={`/product/${photo.id}`}
-                sx={{ textDecoration: "none", height: "100%" }}
+                sx={{ textDecoration: "none", height: "100%", display:"flex", flexDirection: "column", justifyContent:"space-between" }}
               >
                 <CardMedia
                   component="img"

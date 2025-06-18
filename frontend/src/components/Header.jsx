@@ -21,7 +21,7 @@ export default function Header({
       position="static" 
       color="transparent" 
       elevation={1} 
-      sx={{ mb: 3, border: '1px solid', borderColor: 'grey.300', borderRadius: 5, zIndex: (theme) => theme.zIndex.appBar + 1, }}
+      sx={{ mb: 3, border: '1px solid', borderColor: 'grey.300', zIndex: (theme) => theme.zIndex.appBar + 1, }}
     >
       <Toolbar
         sx={{

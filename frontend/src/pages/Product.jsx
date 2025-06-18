@@ -112,9 +112,27 @@ export default function Product() {
         </Alert>
       )}
 
-      <Grid container spacing={4}>
+      <Grid container spacing={4} alignItems="stretch" justifyContent="center">
         {filtered.map((product) => (
-          <Grid item key={product.id} xs={12} sm={4} md={4} lg={4}>
+          <Grid
+          item
+          key={product.id}
+          sx={{
+            flexBasis: {
+              lg: '20%',
+              md: '33.33%',
+              sm: '50%',
+              xs: '100%',
+            },
+            maxWidth: {
+              lg: '20%',
+              md: '33.33%',
+              sm: '50%',
+              xs: '100%',
+            },
+            display: 'flex',
+          }}
+        >
 
             <Paper
               component={Link}
@@ -124,6 +142,8 @@ export default function Product() {
                 textDecoration: 'none',
                 display: 'flex',
                 flexDirection: 'column',
+                justifyContent: 'space-between',
+                width: '100%',
                 height: '100%',
                 borderRadius: 3,
                 overflow: 'hidden',
@@ -144,7 +164,7 @@ export default function Product() {
                   sx={{ 
                     height: 180,
                     width: '100%',
-                    objectFit: 'contain',
+                    objectFit: 'cover',
                     objectPosition: 'center',
                     backgroundColor: '#f5f5f5',
                   }}
@@ -175,7 +195,6 @@ export default function Product() {
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical',
                     mb: 1,
-                    flexGrow: 1,
                   }}
                 >
                   {product.description}
