@@ -63,7 +63,7 @@ export default function Header({
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap', flexGrow: 1, maxWidth: 600 }}>
           <InputBase
-            placeholder="Search by seller or location"
+            placeholder="Search by Product, seller or location"
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
             startAdornment={<SearchIcon sx={{ mr: 1, color: 'grey.600' }} />}
@@ -71,7 +71,7 @@ export default function Header({
               flexGrow: 1,
               border: '1px solid',
               borderColor: 'grey.300',
-              borderRadius: 5,
+              borderRadius: 2,
               px: 1,
               py: 0.5,
             }}
@@ -89,6 +89,7 @@ export default function Header({
               <MenuItem value="Automobiles">Automobiles</MenuItem>
               <MenuItem value="Clothing">Clothing</MenuItem>
               <MenuItem value="Electronics">Electronics</MenuItem>
+              <MenuItem value="Fashion & Beauty">Fashion & Beauty</MenuItem>
               <MenuItem value="Home & Garden">Home & Garden</MenuItem>
               <MenuItem value="Toys">Toys</MenuItem>
             </Select>
