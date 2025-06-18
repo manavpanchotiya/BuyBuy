@@ -42,19 +42,27 @@ export default function Product() {
   }, [showSwappableOnly]);
 
   const filtered = products.filter((product) => {
-    const searchMatch =
+    const term = searchTerm.toLowerCase().trim();
+    const nameMatch =
+      product.name?.toLowerCase().includes(term);
+    const sellerMatch =
       product.user?.first_name
         ?.toLowerCase()
-        .includes(searchTerm.toLowerCase()) ||
-      product.user?.user_location
+        .includes(term);
+    const locationMatch =
+      product.user?.location
         ?.toLowerCase()
-        .includes(searchTerm.toLowerCase());
-
+        .includes(term);
+  
+    const searchMatch =
+      nameMatch || sellerMatch || locationMatch;
+  
     const categoryMatch =
-      !category || category === '' || product.category?.name === category;
-
-    return searchTerm ? searchMatch && categoryMatch : categoryMatch;
+      !category || product.category?.name === category;
+  
+    return term ? searchMatch && categoryMatch : categoryMatch;
   });
+  
 
   useEffect(() => {
     if (!loading && searchSubmitted) {
@@ -176,6 +184,10 @@ export default function Product() {
                 <Stack spacing={0.5} mt={1}>
                   <Typography variant="body2" color="text.primary">
                     Quantity: {product.quantity}
+                  </Typography>
+                  
+                  <Typography variant="body2" color="text.primary">
+                    Seller's Location: {product.user?.location}
                   </Typography>
 
                   <Typography variant="body2" color="text.primary">

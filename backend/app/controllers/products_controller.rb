@@ -6,11 +6,19 @@ class ProductsController < ApplicationController
   def index
     products = Product.distinct.includes(:user, :category)
     products = products.where(swappable: true) if params[:swappable] == 'true'
-  
+    
+    if params[:query].present?
+      query = "%#{params[:query]}.strip%"
+      products = products.joins(:user).where(
+        "products.name ILIKE :q OR users.first_name ILIKE :q OR users.last_name ILIKE :q OR users.location ILIKE :q",
+        q: query
+      )
+    end
+
     render json: products.as_json(
       only: [:id, :name, :description, :quantity, :price_in_cents, :image, :swappable],
       include: {
-        user: { only: [:id, :first_name, :user_location] },
+        user: { only: [:id, :first_name, :location] },
         category: { only: [:name] }
       }
     )
@@ -21,7 +29,7 @@ class ProductsController < ApplicationController
     render json: product.as_json(
       only: [:id, :name, :price_in_cents, :description, :image, :quantity],
       include: {
-        user: { only: [:id, :first_name, :user_location] },
+        user: { only: [:id, :first_name, :location] },
         category: { only: [:name] }
       }
     )
