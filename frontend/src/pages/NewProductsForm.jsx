@@ -11,6 +11,8 @@ import {
   Box,
 } from "@mui/material";
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 function NewProduct() {
   const [formData, setFormData] = useState({
     name: "",
@@ -26,7 +28,7 @@ function NewProduct() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch("http://localhost:3000/categories", {
+    fetch(`${backendURL}/products`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -66,7 +68,7 @@ function NewProduct() {
       ...formData,
       price_in_cents: parseInt(formData.price_in_cents, 10),
       category_id: parseInt(formData.category_id, 10),
-      quantity: parseInt(formData.quantity, 10), // ensure quantity is integer
+      quantity: parseInt(formData.quantity, 10),
     };
 
     if (isNaN(payload.price_in_cents) || payload.price_in_cents < 0) {
@@ -82,7 +84,7 @@ function NewProduct() {
     setLoading(true);
 
     const token = localStorage.getItem("token");
-    fetch("http://localhost:3000/products", {
+    fetch(`${backendURL}/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
