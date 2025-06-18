@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: proc { [200, {}, ['API is running']] } 
   # Mount Action Cable for WebSocket connections
   mount ActionCable.server => '/cable'
 
