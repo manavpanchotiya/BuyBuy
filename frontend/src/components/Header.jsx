@@ -38,8 +38,8 @@ export default function Header({
           <BuyBuyLogo />
           
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
-            <Button component={RouterLink} to="/" color="inherit" size="small">Home</Button>
-            <Button component={RouterLink} to="/products" color="inherit" size="small">All Products</Button>
+            {/* <Button component={RouterLink} to="/" color="inherit" size="small">Home</Button> */}
+            <Button component={RouterLink} to="/products" color="inherit" size="small">Home</Button>
             <Button component={RouterLink} to="/seller" color="inherit" size="small">My Products</Button>
             {user ? (
               <>
