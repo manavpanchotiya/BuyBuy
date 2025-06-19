@@ -44,7 +44,7 @@ export default function FavouritesPage() {
   // Handler to remove favourite
   const handleRemove = (productId, e) => {
     e.stopPropagation(); // prevent card click navigation
-    fetch(`${backendURL}/${productId}`, {
+    fetch(`${backendURL}/favourites/${productId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
