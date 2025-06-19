@@ -20,7 +20,7 @@ function NewProduct() {
     price_in_cents: "",
     image: "",
     category_id: "",
-    quantity: 1, // default quantity
+    quantity: 1,
   });
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
