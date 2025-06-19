@@ -58,7 +58,7 @@ export default function AdminDashboard({ user }) {
       },
     }).catch(() => {
       alert("Failed to delete product");
-      // Optional: revert UI change here
+      
     });
   };
 

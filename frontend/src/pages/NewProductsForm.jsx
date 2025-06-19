@@ -12,8 +12,6 @@ import {
 } from "@mui/material";
 import { backendURL } from "../api";
 
-// const backendURL = import.meta.env.VITE_BACKEND_URL;
-
 function NewProduct() {
   const [formData, setFormData] = useState({
     name: "",

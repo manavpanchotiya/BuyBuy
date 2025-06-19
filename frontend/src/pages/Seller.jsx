@@ -12,6 +12,7 @@ import {
   Button,
   Grid,
 } from "@mui/material";
+import { backendURL } from "../api";
 
 function SellerProducts() {
   const [products, setProducts] = useState([]);
