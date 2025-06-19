@@ -13,6 +13,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import FavouritesPage from './pages/Favourites';
 import ChatPage from './pages/ChatPage';
+import { backendURL } from './api';
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,7 +27,7 @@ export default function App() {
     const token = localStorage.getItem('token');
     if (!token) return;
 
-    fetch('http://localhost:3000/me', {
+    fetch(`${backendURL}/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -46,7 +47,7 @@ export default function App() {
 
   const handleLogout = () => {
     const token = localStorage.getItem('token');
-    fetch('http://localhost:3000/logout', {
+    fetch(`${backendURL}/logout`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

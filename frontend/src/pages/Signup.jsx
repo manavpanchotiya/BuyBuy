@@ -8,6 +8,7 @@ import {
   Paper,
   Alert,
 } from "@mui/material";
+import { backendURL } from "../api";
 
 export default function Signup({ onSignup }) {
   const [fname, setFname] = useState("");
@@ -23,7 +24,7 @@ export default function Signup({ onSignup }) {
     setErrorMsg(null);
 
     try {
-      const res = await fetch("http://localhost:3000/signup", {
+      const res = await fetch(`${backendURL}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

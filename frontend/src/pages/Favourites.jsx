@@ -10,6 +10,7 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { backendURL } from "../api";
 
 export default function FavouritesPage() {
   const [favourites, setFavourites] = useState([]);
@@ -23,7 +24,7 @@ export default function FavouritesPage() {
       return;
     }
 
-    fetch("http://localhost:3000/favourites", {
+    fetch(`${backendURL}/favourites`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -43,7 +44,7 @@ export default function FavouritesPage() {
   // Handler to remove favourite
   const handleRemove = (productId, e) => {
     e.stopPropagation(); // prevent card click navigation
-    fetch(`http://localhost:3000/favourites/${productId}`, {
+    fetch(`${backendURL}/${productId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

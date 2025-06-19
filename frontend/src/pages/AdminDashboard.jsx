@@ -14,6 +14,7 @@ import {
   Stack,
   Divider,
 } from "@mui/material";
+import { backendURL } from "../api";
 
 export default function AdminDashboard({ user }) {
   if (!user || !user.admin) {
@@ -26,7 +27,7 @@ export default function AdminDashboard({ user }) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch("http://localhost:3000/admin", {
+    fetch(`${backendURL}/admin`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -50,7 +51,7 @@ export default function AdminDashboard({ user }) {
 
     setProducts((prev) => prev.filter((p) => p.id !== productId));
 
-    fetch(`http://localhost:3000/products/${productId}`, {
+    fetch(`${backendURL}/products/${productId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

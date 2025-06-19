@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MessageIcon from "@mui/icons-material/Message";
+import { backendURL } from "../api";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -27,7 +28,7 @@ export default function ProductDetails() {
   // Fetch product details
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:3000/products/${id}`)
+    fetch(`${backendURL}/products/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Network error!");
         return res.json();
@@ -46,7 +47,7 @@ export default function ProductDetails() {
   useEffect(() => {
     if (!product) return;
 
-    fetch(`http://localhost:3000/products`)
+    fetch(`${backendURL}/products`)
       .then((res) => res.json())
       .then((data) => {
         const filtered = data.filter(
@@ -65,7 +66,7 @@ export default function ProductDetails() {
   useEffect(() => {
     if (!token || !product) return;
 
-    fetch("http://localhost:3000/favourites", {
+    fetch(`${backendURL}/favourites`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -88,7 +89,7 @@ export default function ProductDetails() {
 
     if (!isFavorited) {
       // Add to favorites
-      fetch("http://localhost:3000/favourites", {
+      fetch(`${backendURL}/favourites`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +108,7 @@ export default function ProductDetails() {
         .finally(() => setFavLoading(false));
     } else {
       // Remove from favorites
-      fetch(`http://localhost:3000/favourites/${product.id}`, {
+      fetch(`${backendURL}/favourites/${product.id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

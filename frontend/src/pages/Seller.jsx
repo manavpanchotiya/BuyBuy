@@ -23,7 +23,7 @@ function SellerProducts() {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    fetch("http://localhost:3000/seller", {
+    fetch(`${backendURL}/seller`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -43,7 +43,7 @@ function SellerProducts() {
   }, []);
 
   const handleMarkSoldOut = (productId, e) => {
-    e.stopPropagation(); // prevent card navigation
+    e.stopPropagation();
     if (!window.confirm("Mark this item as sold out?")) return;
 
     setProducts((prevProducts) =>
@@ -54,12 +54,12 @@ function SellerProducts() {
   };
 
   const handleDelete = (productId, e) => {
-    e.stopPropagation(); // prevent card navigation
+    e.stopPropagation();
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     const token = localStorage.getItem("token");
 
-    fetch(`http://localhost:3000/products/${productId}`, {
+    fetch(`${backendURL}/products/${productId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
