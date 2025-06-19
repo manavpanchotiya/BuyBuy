@@ -1,3 +1,8 @@
 // frontend/src/cable.js
 import { createConsumer } from "@rails/actioncable";
-export default createConsumer("ws://localhost:3000/cable"); // Update if deployed
+import { backendURL } from "./api";
+
+const wsProtocol = backendURL.startsWith("https") ? "wss" : "ws";
+const wsURL = backendURL.replace(/^http/, wsProtocol) + "/cable";
+
+export default createConsumer(wsURL);

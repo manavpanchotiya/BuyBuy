@@ -12,6 +12,7 @@ import {
   Stack, Tooltip,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { backendURL } from '../api';
 
 export default function Product() {
   const {
@@ -29,8 +30,8 @@ export default function Product() {
 
   useEffect(() => {
     const endpoint = showSwappableOnly
-      ? 'http://localhost:3000/products?swappable=true'
-      : 'http://localhost:3000/products';
+      ? `${backendURL}/products?swappable=true`
+      : `${backendURL}/products`;
 
     fetch(endpoint)
       .then((res) => res.json())
