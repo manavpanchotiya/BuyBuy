@@ -1,4 +1,3 @@
-// frontend/src/cable.js
 import { createConsumer } from "@rails/actioncable";
 import { backendURL } from "./api";
 
