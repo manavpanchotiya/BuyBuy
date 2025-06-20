@@ -70,7 +70,7 @@ Frontend runs at http://localhost:5173
 ![Homepage](screenshots/home_page.png)
 
 ### Product Page
-![Product Page](screenshots/product_details_.png)
+![Product Page](screenshots/product_details.png)
 
 ### My Listings
 ![My Listings](screenshots/my_listings.png)
