@@ -61,7 +61,3 @@ project-root/
 │   ├── src/
 │   ├── public/
 │   └── ...
-
-
-
-
