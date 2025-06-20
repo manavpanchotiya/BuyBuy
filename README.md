@@ -31,3 +31,6 @@ BuyBuy is a full-stack web application that allows users to buy, sell, and swap 
 ## 🛠️ Local Development Setup
 
 ### Backend (Rails)
+1. Clone the repo and install dependencies:
+   ```bash
+   bundle install
