@@ -114,19 +114,17 @@ export default function Product() {
 
       <Grid container spacing={4} alignItems="stretch" justifyContent="center">
         {filtered.map((product) => (
-          <Grid
+            <Grid
           item
           key={product.id}
           sx={{
             flexBasis: {
-              lg: '20%',
-              md: '33.33%',
-              sm: '50%',
-              xs: '100%',
+              md: '16.66%',
+              sm: '50%',     
+              xs: '100%',    
             },
             maxWidth: {
-              lg: '20%',
-              md: '33.33%',
+              md: '16.66%',
               sm: '50%',
               xs: '100%',
             },
