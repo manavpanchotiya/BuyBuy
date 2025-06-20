@@ -77,3 +77,18 @@ Frontend runs at http://localhost:5173
 
 ### Favourites
 ![Favourites](screenshots/favourites.png)
+
+### Chats
+![Chats](screenshots/chat.png)
+
+### Add New Product
+![Add New Product](screenshots/add_new_product.png)
+
+### Log In
+![Log In](screenshots/login.png)
+
+### Sign Up
+![Sign Up](screenshots/signup.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/admin_dashboard.png)
