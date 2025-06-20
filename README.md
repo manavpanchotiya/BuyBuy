@@ -44,14 +44,15 @@ project-root/
 
 ### Backend (Rails)
 1. Clone the repo and install dependencies:
-   ```bash
+   
    bundle install
    
 2. Set up the database:
-   ```bash
+   
    rails db:create db:migrate db:seed
    rails s
    ```
+
 Backend runs at http://localhost:3000
 
 ### Frontend (React + Vite)
