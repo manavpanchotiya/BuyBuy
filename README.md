@@ -52,14 +52,14 @@ Frontend runs at http://localhost:5173
 
 ## 📁 Project Structure
 project-root/
-├── backend/              # Rails API backend
-│   ├── app/
-│   ├── config/
-│   └── ...
-├── frontend/             # React frontend (Vite)
-│   ├── src/
-│   ├── public/
-│   └── ...
+├── backend/ # Rails API backend
+│ ├── app/
+│ ├── config/
+│ └── ...
+├── frontend/ # React frontend (Vite)
+│ ├── src/
+│ ├── public/
+│ └── ...
 
 
 
