@@ -43,6 +43,7 @@ project-root/
 │   └── ...
 ```
 ### Backend (Rails)
+```
 1. Clone the repo and install dependencies:
    
    bundle install
@@ -56,7 +57,7 @@ project-root/
 Backend runs at http://localhost:3000
 
 ### Frontend (React + Vite)
-   ```bash
+   ```
    cd frontend
    npm install
    npm run dev
