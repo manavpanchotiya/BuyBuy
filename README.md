@@ -30,6 +30,18 @@ BuyBuy is a full-stack web application that allows users to buy, sell, and swap 
 
 ## 🛠️ Local Development Setup
 
+## 📁 Project Structure
+```text
+project-root/
+├── backend/              # Rails API backend
+│   ├── app/
+│   ├── config/
+│   └── ...
+├── frontend/             # React frontend (Vite)
+│   ├── src/
+│   ├── public/
+│   └── ...
+
 ### Backend (Rails)
 1. Clone the repo and install dependencies:
    ```bash
@@ -49,15 +61,3 @@ Backend runs at http://localhost:3000
    npm run dev
    ```
 Frontend runs at http://localhost:5173
-
-## 📁 Project Structure
-```text
-project-root/
-├── backend/              # Rails API backend
-│   ├── app/
-│   ├── config/
-│   └── ...
-├── frontend/             # React frontend (Vite)
-│   ├── src/
-│   ├── public/
-│   └── ...
