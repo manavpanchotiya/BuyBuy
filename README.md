@@ -41,7 +41,7 @@ project-root/
 │   ├── src/
 │   ├── public/
 │   └── ...
-
+```
 ### Backend (Rails)
 1. Clone the repo and install dependencies:
    
