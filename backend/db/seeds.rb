@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # Users
-u1 = User.create!(email: "alice@example.com", password: "password1", first_name: "Alice", last_name: "Johnson", location: "Toronto")
+u1 = User.create!(email: "nkiruka@example.com", password: "password1", first_name: "Nkiruka", last_name: "Odu", location: "Toronto")
 u2 = User.create!(email: "bob@example.com", password: "password2", first_name: "Bob", last_name: "Smith", location: "Vancouver")
-u3 = User.create!(email: "carol@example.com", password: "password3", first_name: "Carol", last_name: "Lee", location: "Montreal")
+u3 = User.create!(email: "manav@example.com", password: "password3", first_name: "Manav", last_name: "P", location: "Montreal")
 u4 = User.create!(email: "dave@example.com", password: "password4", first_name: "Dave", last_name: "Brown", location: "Calgary")
 u5 = User.create!(email: "eve@example.com", password: "password5", first_name: "Eve", last_name: "Davis", location: "Ottawa")
 u6 = User.create!(email: "frank@example.com", password: "password6", first_name: "Frank", last_name: "Miller", location: "Edmonton")
