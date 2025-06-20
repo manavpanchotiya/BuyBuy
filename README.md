@@ -63,3 +63,17 @@ Backend runs at http://localhost:3000
    npm run dev
    ```
 Frontend runs at http://localhost:5173
+
+## 🖼️ Screenshots
+
+### Homepage
+![Homepage](screenshots/home_page.png)
+
+### Product Page
+![Product Page](screenshots/product_details_.png)
+
+### My Listings
+![My Listings](screenshots/my_listings.png)
+
+### Favourites
+![Favourites](screenshots/favourites.png)
