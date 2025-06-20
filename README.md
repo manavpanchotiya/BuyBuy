@@ -27,9 +27,9 @@ BuyBuy is a full-stack web application that allows users to buy, sell, and swap 
 - 📱 Responsive design with Material UI  
 
 ---
-```text
-📁 Project Structure
 
+📁 Project Structure
+```text
 project-root/
 ├── backend/              # Rails API backend
 │   ├── app/
